@@ -1,0 +1,279 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E2EAF32-83FF-40D5-868A-5AED3C2DEB2E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TayanaYachts</RootNamespace>
+    <AssemblyName>TayanaYachts</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44316</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\csshover.htc" />
+    <Content Include="css\homestyle.css" />
+    <Content Include="css\iepngfix.htc" />
+    <Content Include="css\js.css" />
+    <Content Include="css\reset.css" />
+    <Content Include="css\style.css" />
+    <Content Include="dealers.aspx" />
+    <Content Include="dealers_Back.aspx" />
+    <Content Include="images\back.gif" />
+    <Content Include="images\banner001.jpg" />
+    <Content Include="images\banner001b.jpg" />
+    <Content Include="images\banner002.jpg" />
+    <Content Include="images\banner002b.jpg" />
+    <Content Include="images\banner003.jpg" />
+    <Content Include="images\banner003b.jpg" />
+    <Content Include="images\banner004.jpg" />
+    <Content Include="images\banner004b.jpg" />
+    <Content Include="images\banner005.jpg" />
+    <Content Include="images\banner005b.jpg" />
+    <Content Include="images\banner006.jpg" />
+    <Content Include="images\banner006b.jpg" />
+    <Content Include="images\banner00_masks.png" />
+    <Content Include="images\banner01_masks.png" />
+    <Content Include="images\banner02_masks.png" />
+    <Content Include="images\banner_masks.png" />
+    <Content Include="images\bg1.jpg" />
+    <Content Include="images\bgbg.jpg" />
+    <Content Include="images\bot.jpg" />
+    <Content Include="images\bot1.jpg" />
+    <Content Include="images\buttbg.gif" />
+    <Content Include="images\buttleft.gif" />
+    <Content Include="images\buttom01.gif" />
+    <Content Include="images\buttom02.gif" />
+    <Content Include="images\buttom03.gif" />
+    <Content Include="images\buttright.gif" />
+    <Content Include="images\changbg.gif" />
+    <Content Include="images\changbg.png" />
+    <Content Include="images\changbg1.gif" />
+    <Content Include="images\changbg1.png" />
+    <Content Include="images\company.jpg" />
+    <Content Include="images\contact.jpg" />
+    <Content Include="images\con_bg.gif" />
+    <Content Include="images\DEALERS.jpg" />
+    <Content Include="images\dealers001.jpg" />
+    <Content Include="images\dealers002.jpg" />
+    <Content Include="images\dealers003.jpg" />
+    <Content Include="images\dealers004.jpg" />
+    <Content Include="images\deckplan01.jpg" />
+    <Content Include="images\downloads.gif" />
+    <Content Include="images\footer.jpg" />
+    <Content Include="images\i001.jpg" />
+    <Content Include="images\i002.jpg" />
+    <Content Include="images\i003.jpg" />
+    <Content Include="images\i004.jpg" />
+    <Content Include="images\i005.jpg" />
+    <Content Include="images\i006.jpg" />
+    <Content Include="images\icon001.gif" />
+    <Content Include="images\icon002.gif" />
+    <Content Include="images\icon003.gif" />
+    <Content Include="images\icon004.gif" />
+    <Content Include="images\icon005.gif" />
+    <Content Include="images\icon006.gif" />
+    <Content Include="images\icon007.gif" />
+    <Content Include="images\icon008.gif" />
+    <Content Include="images\lefttop.gif" />
+    <Content Include="images\mainbg.gif" />
+    <Content Include="images\menu.gif" />
+    <Content Include="images\menu.jpg" />
+    <Content Include="images\menu1.jpg" />
+    <Content Include="images\menu1_03.gif" />
+    <Content Include="images\menu1_04.gif" />
+    <Content Include="images\menu1_05.gif" />
+    <Content Include="images\menu1_06.gif" />
+    <Content Include="images\menu1_07.gif" />
+    <Content Include="images\menu2_03.gif" />
+    <Content Include="images\menu2_04.gif" />
+    <Content Include="images\menu2_05.gif" />
+    <Content Include="images\menu2_06.gif" />
+    <Content Include="images\menu2_07.gif" />
+    <Content Include="images\menu_y1_03.jpg" />
+    <Content Include="images\menu_y1_04.jpg" />
+    <Content Include="images\menu_y1_05.jpg" />
+    <Content Include="images\menu_y1_06.jpg" />
+    <Content Include="images\menu_y2_03.jpg" />
+    <Content Include="images\menu_y2_04.jpg" />
+    <Content Include="images\menu_y2_05.jpg" />
+    <Content Include="images\menu_y2_06.jpg" />
+    <Content Include="images\mmmmeeeee.gif" />
+    <Content Include="images\navline.gif" />
+    <Content Include="images\nav_hover_bg.gif" />
+    <Content Include="images\new01.png" />
+    <Content Include="images\newbanner.jpg" />
+    <Content Include="images\news.gif" />
+    <Content Include="images\news_list.jpg" />
+    <Content Include="images\news_show.jpg" />
+    <Content Include="images\new_top01.png" />
+    <Content Include="images\pit001.jpg" />
+    <Content Include="images\pit002.jpg" />
+    <Content Include="images\pit003.jpg" />
+    <Content Include="images\pit004.jpg" />
+    <Content Include="images\pit006.jpg" />
+    <Content Include="images\pit007.jpg" />
+    <Content Include="images\pit008.jpg" />
+    <Content Include="images\pit009.jpg" />
+    <Content Include="images\pit010.jpg" />
+    <Content Include="images\rnav_line.gif" />
+    <Content Include="images\sub_bg.gif" />
+    <Content Include="images\test002.jpg" />
+    <Content Include="images\test1.jpg" />
+    <Content Include="images\tog.jpg" />
+    <Content Include="images\top.gif" />
+    <Content Include="images\TOP.jpg" />
+    <Content Include="images\TOP1.jpg" />
+    <Content Include="images\TOP2.jpg" />
+    <Content Include="images\TOP3.jpg" />
+    <Content Include="images\TOP4.jpg" />
+    <Content Include="images\TOP5.jpg" />
+    <Content Include="images\topa1.jpg" />
+    <Content Include="images\topa2.jpg" />
+    <Content Include="images\topa3.jpg" />
+    <Content Include="images\transparent.gif" />
+    <Content Include="images\ya01.jpg" />
+    <Content Include="images\yachts.jpg" />
+    <Content Include="images\yachts_1.jpg" />
+    <Content Include="images\yachts_2.jpg" />
+    <Content Include="javascript\iepngfix_tilebg.js" />
+    <Content Include="javascript\pngfix.js" />
+    <Content Include="Scripts\AC_RunActiveContent.js" />
+    <Content Include="Scripts\jquery-1.6.1.min.js" />
+    <Content Include="Scripts\jquery.cycle.all.2.74.js" />
+    <Content Include="Scripts\jquery.cycle.all.latest.js" />
+    <Content Include="Scripts\jquery.event.hover-1.0.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.timers.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dealers.aspx.cs">
+      <DependentUpon>dealers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dealers.aspx.designer.cs">
+      <DependentUpon>dealers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dealers_Back.aspx.cs">
+      <DependentUpon>dealers_Back.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dealers_Back.aspx.designer.cs">
+      <DependentUpon>dealers_Back.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\Thumbs.db" />
+    <None Include="packages.config" />
+    <Content Include="Site1.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53055</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44316/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
