@@ -73,8 +73,8 @@
     <Content Include="css\js.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\style.css" />
-    <Content Include="dealers.aspx" />
-    <Content Include="dealers_Back.aspx" />
+    <Content Include="Dealers.aspx" />
+    <Content Include="Dealers_Back.aspx" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
     <Content Include="images\banner001b.jpg" />
@@ -204,19 +204,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dealers.aspx.cs">
-      <DependentUpon>dealers.aspx</DependentUpon>
+    <Compile Include="Dealers.aspx.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="dealers.aspx.designer.cs">
-      <DependentUpon>dealers.aspx</DependentUpon>
+    <Compile Include="Dealers.aspx.designer.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
     </Compile>
-    <Compile Include="dealers_Back.aspx.cs">
-      <DependentUpon>dealers_Back.aspx</DependentUpon>
+    <Compile Include="Dealers_Back.aspx.cs">
+      <DependentUpon>Dealers_Back.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="dealers_Back.aspx.designer.cs">
-      <DependentUpon>dealers_Back.aspx</DependentUpon>
+    <Compile Include="Dealers_Back.aspx.designer.cs">
+      <DependentUpon>Dealers_Back.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

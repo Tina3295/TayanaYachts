@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="dealers.aspx.cs" Inherits="TayanaYachts.dealers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Dealers.aspx.cs" Inherits="TayanaYachts.dealers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -62,9 +62,11 @@
 <div class="left1">
 <p><span>DEALERS</span></p>
 <ul>
-<li><a href="#">Unite States</a></li>
-<li><a href="#">Europe</a></li>
-<li><a href="#">Asia</a></li>
+    <asp:Repeater ID="CountryRepeater" runat="server">
+        <li><a href="#">Unite States</a></li>
+
+    </asp:Repeater>
+
 </ul>
 
 
