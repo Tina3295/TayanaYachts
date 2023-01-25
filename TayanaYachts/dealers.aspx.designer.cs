@@ -15,12 +15,39 @@ namespace TayanaYachts
     {
 
         /// <summary>
-        /// CountryRepeater 控制項。
+        /// CountryLeft 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater CountryRepeater;
+        protected global::System.Web.UI.WebControls.Literal CountryLeft;
+
+        /// <summary>
+        /// CountryNameRight 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CountryNameRight;
+
+        /// <summary>
+        /// CountryName 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CountryName;
+
+        /// <summary>
+        /// DealerInfo 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal DealerInfo;
     }
 }

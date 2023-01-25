@@ -7,7 +7,7 @@
         <div style="margin-bottom: 20px">
             <ul>
                 <li>
-                    <img src="images/newbanner.jpg" alt="Tayana Yachts"></li>
+                    <img src="images/DealersCover.jpg" alt="Tayana Yachts"></li>
             </ul>
         </div>
 

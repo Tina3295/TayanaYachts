@@ -492,7 +492,7 @@ body {
 }
 
 .conbg {
-    background-image: url(/web/20160915235930im_/http://www.tayanaworld.com/images/con_bg.gif);
+    background-image: url('../images/con_bg.gif');
     float: left;
     width: 1002px;
     margin-top: 23px;
@@ -537,13 +537,13 @@ body {
         .left1 a:hover {
             color: #34A9D4;
             background-color: #FFFFFF;
-            background-image: url(/web/20160915235930im_/http://www.tayanaworld.com/images/icon003.gif);
+            background-image: url('../images/icon003.gif');
             background-repeat: no-repeat;
             background-position: 16px 14px;
         }
 
     .left1 li {
-        background-image: url(/web/20160915235930im_/http://www.tayanaworld.com/images/icon004.gif);
+        background-image: url('../images/icon004.gif');
         background-repeat: no-repeat;
         display: block;
         border-bottom-width: 1px;
@@ -574,7 +574,7 @@ body, p, blockquote {
     color: #34A9D4;
     font-weight: bold;
     font-size: 120%;
-    padding-left: 21px;
+    padding-left: 2px;
     float: left;
     margin-top: 5px;
 }
@@ -654,4 +654,8 @@ body, p, blockquote {
     color: white;
     padding: 8px 15px;
     background-color: rgba(250,90,90,1);
+}
+
+.rightguide {
+    color: rgb(52, 169, 212);
 }
