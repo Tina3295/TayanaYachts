@@ -1,0 +1,486 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace TayanaYachts
+{
+    public partial class NewsBack : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Calendar1.SelectedDate = Calendar1.TodaysDate;
+                LoadYears();
+
+                //loadDayNewsHeadline();
+            }
+        }
+
+        protected void AddTitle_Click(object sender, EventArgs e)
+        {   //隨機識別碼+秒
+            string guid = Guid.NewGuid().ToString().Trim() + DateTime.Now.ToString("ff");
+            string SelDate = Calendar1.SelectedDate.ToString("yyyy-M-dd");
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "INSERT INTO News (ReleaseDate, NewsTitle, Guid, IsTop) VALUES (@ReleaseDate, @NewsTitle, @Guid, @IsTop)";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@ReleaseDate", SelDate);
+            command.Parameters.AddWithValue("@NewsTitle", AddNewsTitle.Text);
+            command.Parameters.AddWithValue("@Guid", guid);
+            command.Parameters.AddWithValue("@IsTop", AddIsTop.Checked.ToString());
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            //渲染畫面
+            NewsTitleRadioBtnList.Items.Clear();
+            ShowNewsTitle();
+
+
+
+            AddNewsTitle.Text = "";
+        }
+
+
+
+        private void ShowNewsTitle()
+        {
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT * FROM News WHERE ReleaseDate = @ReleaseDate ORDER BY IsTop DESC,NewID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@ReleaseDate", Calendar1.SelectedDate.ToString("yyyy-M-dd"));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ListItem listItem = new ListItem();
+                bool istop = Convert.ToBoolean(reader["isTop"]);
+                if (istop)
+                {
+                    listItem.Text = reader["NewsTitle"].ToString() + "(Top)";
+                }
+                else
+                {
+                    listItem.Text = reader["NewsTitle"].ToString();
+                }
+
+                listItem.Value = reader["NewID"].ToString();
+                NewsTitleRadioBtnList.Items.Add(listItem);
+            }
+            connection.Close();
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            //deleteNewsBtn.Visible = false;
+
+            NewsTitleRadioBtnList.Items.Clear();
+            ShowNewsTitle();
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            //取得新聞日期
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = $"SELECT ReleaseDate FROM News";
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                DateTime newsTime = DateTime.Parse(reader["ReleaseDate"].ToString());
+                //修改有新聞的日期外觀
+                if (e.Day.Date.Date == newsTime && e.Day.Date.Date != Calendar1.SelectedDate)
+                {
+                    //e.Cell.BorderWidth = Unit.Pixel(1); //外框線粗細
+                    //e.Cell.BorderColor = Color.BlueViolet; //外框線顏色
+                    e.Cell.Font.Underline = true; //有無下地線
+                    e.Cell.Font.Bold = true; //是否為粗體
+                    e.Cell.ForeColor = Color.DodgerBlue; //外觀色彩
+                }
+            }
+            connection.Close();
+        }
+
+
+
+
+        private void LoadYears()
+        {
+
+
+            for (int i = 1960; i <= 2100; i++)
+            {
+                Years.Items.Add(i.ToString());
+                CanlendarYear.Items.Add(i.ToString());
+                //Years.Items.FindByValue(System.DateTime.Now.Year.ToString());
+            }
+            string nowYear = System.DateTime.Now.Year.ToString();
+            CanlendarYear.Items.FindByValue(nowYear).Selected = true;
+            //cb_Years.Items.Insert(0, new ListEditItem(strYear, Convert.ToString(0)));
+            //cb_Years.SelectedIndex = 0;
+
+            for (int i = 1; i <= 12; i++)
+            {
+                Months.Items.Add(i.ToString());
+            }
+            FillDays();
+        }
+        public void FillDays()
+        {
+            Days.Items.Clear();
+
+            int noofdays = DateTime.DaysInMonth(Convert.ToInt32(Years.SelectedValue), Convert.ToInt32(Months.SelectedValue));
+            for (int i = 1; i <= noofdays; i++)
+            {
+                Days.Items.Add(i.ToString());
+            }
+            //ddlDay.Items.FindByValue(System.DateTime.Now.Day.ToString()).Selected = true;// Set current date as selected
+        }
+
+        protected void Years_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillDays();
+        }
+        protected void Months_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillDays();
+        }
+
+        protected void CanlendarYear_SelectedIndexChanged(object sender, EventArgs e)
+        {//讓日曆直接跳到所選年份    
+            int year = Convert.ToInt32(CanlendarYear.SelectedItem.Text);
+            int month = Convert.ToInt32(Calendar1.SelectedDate.Month);
+            int day = Convert.ToInt32(Calendar1.SelectedDate.Day);
+            Calendar1.TodaysDate = new DateTime(year, month, day);
+        }
+
+        protected void NewsTitleRadioBtnList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //顯示新聞詳細資訊
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+
+            string sql = "SELECT * FROM News where NewID = @NewID";
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+
+                Years.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Year.ToString();
+                Months.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Month.ToString();
+                Days.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Day.ToString();
+                Thumbnailimg.ImageUrl = "/images/" + reader["Thumbnail"].ToString();
+                NewsTitle.Text = reader["NewsTitle"].ToString();
+                IsTop.Checked = Convert.ToBoolean(reader["IsTop"]);
+                //Contact.Text = reader["Contact"].ToString();
+                //Address.Text = reader["Address"].ToString();
+                //TEL.Text = reader["TEL"].ToString();
+                //Fax.Text = reader["Fax"].ToString();
+                //Email.Text = reader["Email"].ToString();
+                //Link.Text = reader["Link"].ToString();
+                InitDate.Text = reader["InitDate"].ToString();
+            }
+            connection.Close();
+
+            NewsImageData();
+        }
+
+        protected void ThumbnailUploadBtn_Click(object sender, EventArgs e)
+        {
+            if (ThumbnailUpload.HasFile)
+            {
+                //設定存檔路徑，記得加最後"\"
+                string SavePath = Server.MapPath("~/images/");
+                string FinalFileName;
+                string FileName = ThumbnailUpload.FileName;
+                //檢查副檔名
+                int x = FileName.LastIndexOf('.');
+                string a = FileName.Remove(0, x);
+                if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg")
+                {
+                    Response.Write("<Script language='JavaScript'>alert('此檔案非圖檔！');</Script>");
+                }
+                else
+                {
+                    //刪舊圖檔
+                    SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                    string sql2 = "SELECT Thumbnail FROM News WHERE NewID= @NewID";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                    connection.Open();
+                    SqlDataReader reader2 = command2.ExecuteReader();
+                    if (reader2.Read())
+                    {
+                        string delFileName = reader2["Thumbnail"].ToString();
+                        //有舊圖才執行刪除
+                        if (!String.IsNullOrEmpty(delFileName))
+                        {
+                            File.Delete(SavePath + delFileName);
+                        }
+                    }
+                    connection.Close();
+
+
+
+                    //檢查檔名衝突
+                    string PathToCheck = SavePath + FileName;
+                    string TempFileName = "";
+
+                    if (File.Exists(PathToCheck))
+                    {
+                        int count = 2;
+                        while (File.Exists(PathToCheck))
+                        {
+                            string[] FileNameSpilt = FileName.Split('.');
+                            TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
+                            PathToCheck = SavePath + TempFileName;
+                            count++;
+                        }
+                    }
+
+                    ThumbnailUpload.SaveAs(PathToCheck);
+
+                    if (TempFileName != "")
+                    {
+                        FinalFileName = TempFileName;
+                    }
+                    else
+                    {
+                        FinalFileName = FileName;
+                    }
+
+
+
+
+                    string sql = "update News set Thumbnail=@Thumbnail where NewID = @NewID";
+
+                    SqlCommand command = new SqlCommand(sql, connection);
+
+                    command.Parameters.AddWithValue("@Thumbnail", FinalFileName);
+                    command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                    Thumbnailimg.ImageUrl = "/images/" + FinalFileName;
+                }
+            }
+            else
+            {
+                ThumbnailUploadTip.Text = "There's no file to upload!";
+            }
+        }
+
+
+
+
+
+
+
+
+
+        //以下多圖
+        private void NewsImageData()
+        {//顯示出多圖
+            NewsImageRadioButtonList.Items.Clear();
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                string newsimage = reader["NewsImage"].ToString();
+
+                if (!String.IsNullOrEmpty(newsimage))
+                {
+                    string[] newsimages = newsimage.Split(',');
+
+                    foreach (var item in newsimages)
+                    {
+                        ListItem listItem = new ListItem($"<img src='/images/{item}' style='margin:10px' width='230px'/>", item);
+                        NewsImageRadioButtonList.Items.Add(listItem);
+                    }
+                }
+            }
+            connection.Close();
+        }
+
+        protected void DelNewsImage_Click(object sender, EventArgs e)
+        {//刪除圖片
+            string delimage = NewsImageRadioButtonList.SelectedValue;
+            string selecttitle = NewsTitleRadioBtnList.SelectedValue;
+
+            string savenewsimages = "";
+
+            //實際刪除圖檔
+            File.Delete(Server.MapPath("~/images/") + delimage);
+
+            //更新資料庫
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@NewID", selecttitle);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                string newsimage = reader["NewsImage"].ToString();
+
+                try
+                {
+                    string[] newsimages = newsimage.Split(',');
+
+                    newsimages = Array.FindAll(newsimages, val => val != delimage).ToArray();
+
+
+
+                    foreach (var item in newsimages)
+                    {
+                        savenewsimages += item + ",";
+                    }
+                }
+                catch
+                {
+                    savenewsimages = "";
+                }
+            }
+
+            connection.Close();
+
+
+
+
+            if (savenewsimages != "")
+            {
+                string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
+                SqlCommand command2 = new SqlCommand(sql2, connection);
+                command2.Parameters.AddWithValue("@NewID", selecttitle);
+                command2.Parameters.AddWithValue("@NewsImage", savenewsimages.TrimEnd(','));
+                connection.Open();
+                command2.ExecuteNonQuery();
+                connection.Close();
+            }
+            else
+            {
+                string sql2 = "Update News set NewsImage =NULL WHERE NewID= @NewID";
+                SqlCommand command2 = new SqlCommand(sql2, connection);
+                command2.Parameters.AddWithValue("@NewID", selecttitle);
+
+                connection.Open();
+                command2.ExecuteNonQuery();
+                connection.Close();
+            }
+
+
+            NewsImageData();
+        }
+
+
+
+        protected void NewsImageBtn_Click(object sender, EventArgs e)
+        {//上傳多圖
+            string newsimage="";
+            NewsImageTip.Text = "";
+
+            if (NewsImageUpload.HasFile)
+            {
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    newsimage = reader["NewsImage"].ToString();
+                }
+                connection.Close();
+
+
+
+                //設定存檔路徑
+                string SavePath = Server.MapPath("~/images/");
+                string FinalFileName;
+
+
+                //處理每個上傳檔案
+                foreach (HttpPostedFile postedFile in NewsImageUpload.PostedFiles)
+                {
+                    string FileName = postedFile.FileName;
+                    //檢查副檔名
+                    int x = FileName.LastIndexOf('.');
+                    string a = FileName.Remove(0, x);
+
+                    if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg")
+                    {
+                        NewsImageTip.Text += postedFile.FileName + " 非圖檔<br/>";                 
+                    }
+                    else
+                    {
+                        //檢查檔名衝突
+                        string PathToCheck = SavePath + FileName;
+                        string TempFileName = "";
+
+                        if (File.Exists(PathToCheck))
+                        {
+                            int count = 2;
+                            while (File.Exists(PathToCheck))
+                            {
+                                string[] FileNameSpilt = FileName.Split('.');
+                                TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
+                                PathToCheck = SavePath + TempFileName;
+                                count++;
+                            }
+                        }
+
+                        postedFile.SaveAs(PathToCheck);
+
+                        if (TempFileName != "")
+                        {
+                            FinalFileName = TempFileName;
+                        }
+                        else
+                        {
+                            FinalFileName = FileName;
+                        }
+
+                        newsimage += ","+FinalFileName;
+                    }
+                }
+
+
+                //寫入資料庫
+                string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
+                SqlCommand command2 = new SqlCommand(sql2, connection);
+                command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                command2.Parameters.AddWithValue("@NewsImage", newsimage);
+                connection.Open();
+                command2.ExecuteNonQuery();
+                connection.Close();
+
+                NewsImageData();
+
+            }
+            else
+            {
+                NewsImageTip.Text = "There's no file";
+            }
+        }
+    }
+
+}

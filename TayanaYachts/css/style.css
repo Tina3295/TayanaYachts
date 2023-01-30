@@ -659,3 +659,9 @@ body, p, blockquote {
 .rightguide {
     color: rgb(52, 169, 212);
 }
+
+
+
+.newscontent h6 {
+display:inline-block
+}

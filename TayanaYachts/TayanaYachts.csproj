@@ -194,6 +194,7 @@
     <Content Include="images\yachts_2.jpg" />
     <Content Include="javascript\iepngfix_tilebg.js" />
     <Content Include="javascript\pngfix.js" />
+    <Content Include="News_Back.aspx" />
     <Content Include="Scripts\AC_RunActiveContent.js" />
     <Content Include="Scripts\jquery-1.6.1.min.js" />
     <Content Include="Scripts\jquery.cycle.all.2.74.js" />
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="Dealers_Back.aspx.designer.cs">
       <DependentUpon>Dealers_Back.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_Back.aspx.cs">
+      <DependentUpon>News_Back.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_Back.aspx.designer.cs">
+      <DependentUpon>News_Back.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

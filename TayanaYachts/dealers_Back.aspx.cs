@@ -306,7 +306,7 @@ namespace TayanaYachts
             if (AgentimgUpload.HasFile)
             {
                 //設定存檔路徑，記得加最後"\"
-                string SavePath = Server.MapPath("~/images/");//@"C:\Users\swps4\Downloads\Tayanahtml\html\tayana\images\";
+                string SavePath = Server.MapPath("~/images/");
                 string FinalFileName;
                 string FileName = AgentimgUpload.FileName;
                 //檢查副檔名
