@@ -69,6 +69,51 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.RadioButtonList NewsTitleRadioBtnList;
 
         /// <summary>
+        /// AttachmentFileUpload 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload AttachmentFileUpload;
+
+        /// <summary>
+        /// AttachmentBtn 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AttachmentBtn;
+
+        /// <summary>
+        /// AttachmentTip 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AttachmentTip;
+
+        /// <summary>
+        /// AttachmentRadioButtonList 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList AttachmentRadioButtonList;
+
+        /// <summary>
+        /// DelAttachmentBtn 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DelAttachmentBtn;
+
+        /// <summary>
         /// NewsInfoHide 控制項。
         /// </summary>
         /// <remarks>
@@ -159,13 +204,22 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.TextBox NewsTitle;
 
         /// <summary>
-        /// TextBox1 控制項。
+        /// Summary 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox Summary;
+
+        /// <summary>
+        /// CKEditorControl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::CKEditor.NET.CKEditorControl CKEditorControl;
 
         /// <summary>
         /// InitDate 控制項。
@@ -177,22 +231,22 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Label InitDate;
 
         /// <summary>
-        /// UpdateAgent 控制項。
+        /// UpdateNews 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateAgent;
+        protected global::System.Web.UI.WebControls.Button UpdateNews;
 
         /// <summary>
-        /// DeleteAgent 控制項。
+        /// DeleteNews 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DeleteAgent;
+        protected global::System.Web.UI.WebControls.Button DeleteNews;
 
         /// <summary>
         /// NewsImageUpload 控制項。
@@ -238,5 +292,14 @@ namespace TayanaYachts
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DelNewsImage;
+
+        /// <summary>
+        /// DelNewsImageTip 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DelNewsImageTip;
     }
 }

@@ -57,3 +57,6 @@ C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\obj\Debug\TayanaYachts.csp
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\obj\Debug\TayanaYachts.csproj.CopyComplete
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\obj\Debug\TayanaYachts.dll
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\obj\Debug\TayanaYachts.pdb
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\CKEditor.NET.dll
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\CKFinder.dll
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\CKFinder.pdb

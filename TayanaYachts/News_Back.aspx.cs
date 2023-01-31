@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CKFinder;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -22,6 +23,10 @@ namespace TayanaYachts
 
                 //loadDayNewsHeadline();
             }
+            FileBrowser fileBrowser = new FileBrowser();
+            fileBrowser.BasePath = "/ckfinder";
+            fileBrowser.SetupCKEditor(CKEditorControl);
+          
         }
 
         protected void AddTitle_Click(object sender, EventArgs e)
@@ -53,6 +58,8 @@ namespace TayanaYachts
 
         private void ShowNewsTitle()
         {
+            NewsTitleRadioBtnList.Items.Clear();
+
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
             string sql = "SELECT * FROM News WHERE ReleaseDate = @ReleaseDate ORDER BY IsTop DESC,NewID";
             SqlCommand command = new SqlCommand(sql, connection);
@@ -76,6 +83,8 @@ namespace TayanaYachts
                 NewsTitleRadioBtnList.Items.Add(listItem);
             }
             connection.Close();
+
+            
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -115,8 +124,6 @@ namespace TayanaYachts
 
         private void LoadYears()
         {
-
-
             for (int i = 1960; i <= 2100; i++)
             {
                 Years.Items.Add(i.ToString());
@@ -176,24 +183,22 @@ namespace TayanaYachts
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
-
-                Years.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Year.ToString();
-                Months.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Month.ToString();
-                Days.SelectedItem.Text = Convert.ToDateTime(reader["ReleaseDate"]).Day.ToString();
+                Years.SelectedValue = Convert.ToDateTime(reader["ReleaseDate"]).Year.ToString();
+                Months.SelectedValue = Convert.ToDateTime(reader["ReleaseDate"]).Month.ToString();
+                Days.SelectedValue = Convert.ToDateTime(reader["ReleaseDate"]).Day.ToString();
                 Thumbnailimg.ImageUrl = "/images/" + reader["Thumbnail"].ToString();
                 NewsTitle.Text = reader["NewsTitle"].ToString();
                 IsTop.Checked = Convert.ToBoolean(reader["IsTop"]);
-                //Contact.Text = reader["Contact"].ToString();
-                //Address.Text = reader["Address"].ToString();
-                //TEL.Text = reader["TEL"].ToString();
-                //Fax.Text = reader["Fax"].ToString();
-                //Email.Text = reader["Email"].ToString();
-                //Link.Text = reader["Link"].ToString();
+                Summary.Text = reader["Summary"].ToString();
+                CKEditorControl.Text = Server.HtmlDecode(reader["NewsContentHtml"].ToString());
+               
+
                 InitDate.Text = reader["InitDate"].ToString();
             }
             connection.Close();
 
             NewsImageData();
+            ShowAttachment();
         }
 
         protected void ThumbnailUploadBtn_Click(object sender, EventArgs e)
@@ -209,7 +214,7 @@ namespace TayanaYachts
                 string a = FileName.Remove(0, x);
                 if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg")
                 {
-                    Response.Write("<Script language='JavaScript'>alert('此檔案非圖檔！');</Script>");
+                    ThumbnailUploadTip.Text = "type can't be accepted!";
                 }
                 else
                 {
@@ -315,6 +320,7 @@ namespace TayanaYachts
                         ListItem listItem = new ListItem($"<img src='/images/{item}' style='margin:10px' width='230px'/>", item);
                         NewsImageRadioButtonList.Items.Add(listItem);
                     }
+                    DelNewsImage.Visible = true;
                 }
             }
             connection.Close();
@@ -322,72 +328,82 @@ namespace TayanaYachts
 
         protected void DelNewsImage_Click(object sender, EventArgs e)
         {//刪除圖片
-            string delimage = NewsImageRadioButtonList.SelectedValue;
-            string selecttitle = NewsTitleRadioBtnList.SelectedValue;
 
-            string savenewsimages = "";
-
-            //實際刪除圖檔
-            File.Delete(Server.MapPath("~/images/") + delimage);
-
-            //更新資料庫
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-            string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@NewID", selecttitle);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            if (NewsImageRadioButtonList.SelectedValue.ToString() != "")
             {
-                string newsimage = reader["NewsImage"].ToString();
 
-                try
+
+                string delimage = NewsImageRadioButtonList.SelectedValue;
+                string selecttitle = NewsTitleRadioBtnList.SelectedValue;
+
+                string savenewsimages = "";
+
+                //實際刪除圖檔
+                File.Delete(Server.MapPath("~/images/") + delimage);
+
+                //更新資料庫
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@NewID", selecttitle);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
                 {
-                    string[] newsimages = newsimage.Split(',');
+                    string newsimage = reader["NewsImage"].ToString();
 
-                    newsimages = Array.FindAll(newsimages, val => val != delimage).ToArray();
-
-
-
-                    foreach (var item in newsimages)
+                    try
                     {
-                        savenewsimages += item + ",";
+                        string[] newsimages = newsimage.Split(',');
+
+                        newsimages = Array.FindAll(newsimages, val => val != delimage).ToArray();
+
+
+
+                        foreach (var item in newsimages)
+                        {
+                            savenewsimages += item + ",";
+                        }
+                    }
+                    catch
+                    {
+                        savenewsimages = "";
                     }
                 }
-                catch
-                {
-                    savenewsimages = "";
-                }
-            }
 
-            connection.Close();
-
-
-
-
-            if (savenewsimages != "")
-            {
-                string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
-                SqlCommand command2 = new SqlCommand(sql2, connection);
-                command2.Parameters.AddWithValue("@NewID", selecttitle);
-                command2.Parameters.AddWithValue("@NewsImage", savenewsimages.TrimEnd(','));
-                connection.Open();
-                command2.ExecuteNonQuery();
                 connection.Close();
+
+
+
+
+                if (savenewsimages != "")
+                {
+                    string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@NewID", selecttitle);
+                    command2.Parameters.AddWithValue("@NewsImage", savenewsimages.TrimEnd(','));
+                    connection.Open();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+                }
+                else
+                {
+                    string sql2 = "Update News set NewsImage =NULL WHERE NewID= @NewID";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@NewID", selecttitle);
+
+                    connection.Open();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+
+                NewsImageData();
             }
             else
             {
-                string sql2 = "Update News set NewsImage =NULL WHERE NewID= @NewID";
-                SqlCommand command2 = new SqlCommand(sql2, connection);
-                command2.Parameters.AddWithValue("@NewID", selecttitle);
-
-                connection.Open();
-                command2.ExecuteNonQuery();
-                connection.Close();
+                DelNewsImageTip.Text = "There's no chosed image!";
             }
-
-
-            NewsImageData();
         }
 
 
@@ -480,6 +496,193 @@ namespace TayanaYachts
             {
                 NewsImageTip.Text = "There's no file";
             }
+        }
+
+
+
+        //更新新聞資訊
+        protected void UpdateNews_Click(object sender, EventArgs e)
+        {
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "update News set ReleaseDate=@ReleaseDate,NewsTitle=@NewsTitle,Summary=@Summary,IsTop=@IsTop,NewsContentHtml=@NewsContentHtml where NewID = @NewID";
+
+            SqlCommand command = new SqlCommand(sql, connection);
+
+            DateTime releasedate = new DateTime(Convert.ToInt32(Years.SelectedItem.Text), Convert.ToInt32(Months.SelectedItem.Text), Convert.ToInt32(Days.SelectedItem.Text));
+            command.Parameters.AddWithValue("@ReleaseDate", releasedate);
+            command.Parameters.AddWithValue("@NewsTitle", NewsTitle.Text.ToString());
+            command.Parameters.AddWithValue("@Summary", Summary.Text.ToString());
+            command.Parameters.AddWithValue("@IsTop", IsTop.Checked);
+            command.Parameters.AddWithValue("@NewsContentHtml", HttpUtility.HtmlEncode(CKEditorControl.Text).ToString());
+            
+            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+
+
+            //讓日曆跳到改的日期
+            Calendar1.SelectedDates.Clear();
+            Calendar1.SelectedDate = releasedate;
+            Calendar1.VisibleDate =releasedate;
+             ShowNewsTitle();
+            //DealerRadioButtonList.SelectedItem.Text = Area.Text.ToString();
+        }
+
+        protected void DeleteNews_Click(object sender, EventArgs e)
+        {
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            SqlCommand command = new SqlCommand($"DELETE  FROM News WHERE (NewID = @NewID)", connection);
+            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            ShowNewsTitle();
+        }
+
+
+
+        //以下附件相關
+        protected void AttachmentBtn_Click(object sender, EventArgs e)
+        {
+            if (AttachmentFileUpload.HasFile)
+            {
+                string SavePath = Server.MapPath("~/attachment/");
+                string FinalFileName;
+
+                foreach (HttpPostedFile postedFile in AttachmentFileUpload.PostedFiles)
+                {
+                    string FileName = postedFile.FileName;
+                    //檢查副檔名
+                    int x = FileName.LastIndexOf('.');
+                    string a = FileName.Remove(0, x);
+                    if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg" && a != ".doc" && a != ".docx"
+                        && a != ".xls" && a != ".xlsx" && a != ".ppt" && a != ".pptx" && a != ".pdf" && a != ".bmp"
+                        && a != ".txt" && a != ".zip" && a != ".rar" && a != ".bmp")
+                    {              
+                        AttachmentTip.Text = postedFile.FileName+"type can't be accepted";
+                    }
+                    else
+                    {
+                        //檢查檔名衝突
+                        string PathToCheck = SavePath + FileName;
+                        string TempFileName = "";
+
+                        if (File.Exists(PathToCheck))
+                        {
+                            int count = 2;
+                            while (File.Exists(PathToCheck))
+                            {
+                                string[] FileNameSpilt = FileName.Split('.');
+                                TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
+                                PathToCheck = SavePath + TempFileName;
+                                count++;
+                            }
+                        }
+
+                        postedFile.SaveAs(PathToCheck);
+
+                        if (TempFileName != "")
+                        {
+                            FinalFileName = TempFileName;
+                        }
+                        else
+                        {
+                            FinalFileName = FileName;
+                        }
+
+                        SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                        string sql = "INSERT INTO NewsAttachment(AttachmentName,NewID) VALUES(@AttachmentName,@NewID)";
+                        SqlCommand command = new SqlCommand(sql, connection);
+
+                        command.Parameters.AddWithValue("@AttachmentName", FinalFileName);
+                        command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                        
+                        connection.Open();
+                        command.ExecuteNonQuery(); 
+                        connection.Close();
+
+
+
+
+                    }
+                }
+                ShowAttachment();
+            }
+            else
+            {
+                AttachmentTip.Text = "There's no file";
+            }
+        }
+
+        protected void ShowAttachment()
+        {
+            AttachmentRadioButtonList.Items.Clear();
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT AttachmentID,AttachmentName FROM NewsAttachment WHERE NewID = @NewID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ListItem listItem = new ListItem($"<a href='attachment/{reader["AttachmentName"]}' download>{reader["AttachmentName"]}</a>", reader["AttachmentID"].ToString());
+                AttachmentRadioButtonList.Items.Add(listItem);
+
+
+                //ListItem listItem = new ListItem();
+                //bool istop = Convert.ToBoolean(reader["isTop"]);
+                //if (istop)
+                //{
+                //    listItem.Text = reader["NewsTitle"].ToString() + "(Top)";
+                //}
+                //else
+                //{
+                //    listItem.Text = reader["NewsTitle"].ToString();
+                //}
+
+                //listItem.Value = reader["AttachmentID"].ToString();
+                //NewsTitleRadioBtnList.Items.Add(listItem);
+            }
+            connection.Close();
+        }
+
+
+
+
+        protected void DelAttachmentBtn_Click(object sender, EventArgs e)
+        {
+            //刪除實際檔案
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT AttachmentName FROM NewsAttachment WHERE AttachmentID = @AttachmentID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("AttachmentID", AttachmentRadioButtonList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                File.Delete(Server.MapPath("~/attachment/") + reader["AttachmentName"].ToString());
+            }
+            connection.Close();
+
+
+            //刪除資料庫資料
+            SqlCommand command2 = new SqlCommand($"DELETE  FROM NewsAttachment WHERE (AttachmentID = @AttachmentID)", connection);
+            command2.Parameters.AddWithValue("@AttachmentID", AttachmentRadioButtonList.SelectedValue);
+            connection.Open();
+            command2.ExecuteNonQuery();
+            connection.Close();
+
+
+
+
+            ShowAttachment();
+
+           
         }
     }
 

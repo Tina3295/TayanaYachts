@@ -1,17 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="News_Back.aspx.cs" Inherits="TayanaYachts.NewsBack" %>
 
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
+        <!--
         <div style="margin-bottom: 20px">
             <ul>
                 <li>
                     <img src="images/DealersCover.jpg" alt="Tayana Yachts"></li>
             </ul>
-        </div>
+        </div>-->
 
-        <div style="margin: 0 20px; display: flex; padding: 0 10px">
+        <div style="margin: 0 10px; display: flex; padding: 0 10px">
 
 
             <div class="card mb-4 py-3 border-bottom-primary" style="width: 48%">
@@ -33,14 +36,14 @@
                     </div>
                     <br />
 
-                    <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="100%" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
+                    <asp:Calendar ID="Calendar1" runat="server"  BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="100%" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
                         <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                         <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" />
                         <OtherMonthDayStyle ForeColor="#999999" />
                         <SelectedDayStyle BackColor="#3399FF" ForeColor="White" Font-Bold="True" />
                         <TitleStyle BackColor="White" BorderColor="#3399FF" BorderWidth="3px" Font-Bold="True" Font-Size="12pt" ForeColor="#3399FF" />
                         <TodayDayStyle BackColor="#CCCCCC" />
-                    </asp:Calendar>
+                    </asp:Calendar><br/>
                     <hr />
                     <h6 style="display: inline-block">New Title :</h6>
                     <asp:TextBox ID="AddNewsTitle" runat="server" type="text" class="form-control" MaxLength="75" Width="223px"></asp:TextBox>
@@ -51,25 +54,58 @@
             </div>
 
 
+            <div style="width: 48%;margin:0px;display:flex;justify-content:space-between;flex-direction:column">
 
-
-            <div class="card mb-4 py-3 border-bottom-primary" style="width: 48%">
+            <div class="card mb-4 py-3 border-bottom-primary" style="width:91%" >
+                
+                <div>
                 <div class="bluetop">
                     <p>News</p>
                 </div>
 
                 <div class="card-body">
 
-                    <div>
-                        <h6>Title :</h6>
+                    <div style="display:flex">
+                        <h6 style="display:inline-block;margin-right:10px">Title :</h6>
                         <br />
                         <asp:RadioButtonList ID="NewsTitleRadioBtnList" runat="server" class="my-3" AutoPostBack="True" OnSelectedIndexChanged="NewsTitleRadioBtnList_SelectedIndexChanged"></asp:RadioButtonList>
-
-
                     </div>
+                </div></div>
+            </div>
+
+
+                <div class="card mb-4 py-3 border-bottom-primary" style="width:91%;margin-bottom:0" >
+                
+                <div>
+                <div class="bluetop">
+                    <p>Attachments</p>
                 </div>
 
+                <div class="card-body">
+
+                    <div>
+
+                        <asp:FileUpload ID="AttachmentFileUpload" runat="server" AllowMultiple="True" />
+
+                        <asp:Button ID="AttachmentBtn" runat="server" Text="Add New" class="bluebtn"  Style="margin-bottom:3px" OnClick="AttachmentBtn_Click" /><br/>
+                        <asp:Label ID="AttachmentTip" runat="server" Text="" ForeColor="red" Style="margin-top:15px"></asp:Label><hr/>
+                        
+
+                        <asp:RadioButtonList ID="AttachmentRadioButtonList" runat="server" ></asp:RadioButtonList>
+                        <asp:Button ID="DelAttachmentBtn" runat="server" Text="Delete" class="redbtn"  Style="margin-top:3px" OnClick="DelAttachmentBtn_Click"  />
+                    </div>
+                </div></div>
             </div>
+
+
+
+
+            </div>
+
+
+
+
+
         </div>
 
         <asp:Panel ID="NewsInfoHide" runat="server">
@@ -122,16 +158,29 @@
                                     <h6>Summary:</h6>
                                 </td>
                                 <td colspan="2">
-                                    <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" Width="400px" Height="60px"></asp:TextBox>
+                                    <asp:TextBox ID="Summary" runat="server" TextMode="MultiLine" Width="400px" Height="60px"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>NewsContent:</h6>
+                                </td>
+                                <td colspan="2" >
+                                    <CKEditor:CKEditorControl ID="CKEditorControl" runat="server" BasePath="/Scripts/ckeditor/"
+                                        Toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat NumberedList|
+                                        BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|
+                                        BidiLtr|BidiRtl
+                                        /
+                                        Styles|Format|Font|FontSize TextColor|BGColor Link|Image" Width="100%" ></CKEditor:CKEditorControl>
                                 </td>
                             </tr>
 
-                            
                             <tr>
                                 <td>
                                     <h6>InitDate:</h6>
                                 </td>
                                 <td colspan="2">
+                                    
                                     <asp:Label ID="InitDate" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
@@ -144,10 +193,10 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 0 250px 15px 250px">
                         <div style="display: inline-block">
-                            <asp:Button ID="UpdateAgent" Class="bluebtn" runat="server" Text="Update" />
+                            <asp:Button ID="UpdateNews" Class="bluebtn" runat="server" Text="Update" OnClick="UpdateNews_Click"  />
                         </div>
                         <div style="display: inline-block">
-                            <asp:Button ID="DeleteAgent" Class="redbtn" runat="server" Text="Delete" OnClientClick="javascript:if(!window.confirm('你確定要刪除嗎?')) window.event.returnValue = false;" />
+                            <asp:Button ID="DeleteNews" Class="redbtn" runat="server" Text="Delete" OnClientClick="javascript:if(!window.confirm('你確定要刪除嗎?')) window.event.returnValue = false;" OnClick="DeleteNews_Click" />
                         </div>
                     </div>
 
@@ -166,17 +215,18 @@
                 </div>
                 <div class="card-body">
 
-                    
-                            <h6>Upload Horizontal Group Image :</h6>
-                            <div >
-                                <asp:FileUpload ID="NewsImageUpload" runat="server" AllowMultiple="True" />
-                                <asp:Button ID="NewsImageBtn" runat="server" Text="Upload" class="bluebtn" OnClick="NewsImageBtn_Click"  /><br/>
-                                <asp:Label ID="NewsImageTip" runat="server" Text="" ForeColor="Red"></asp:Label>
-                            </div><hr/>
-                            <h6>News Image List :</h6>
-                            <asp:RadioButtonList ID="NewsImageRadioButtonList" runat="server"   CellPadding="10" RepeatColumns="3" RepeatDirection="Horizontal"></asp:RadioButtonList>
-                            <asp:Button ID="DelNewsImage" runat="server" Text="Delete Image" type="button" class="redbtn" Style="margin-top:10px" OnClientClick="return confirm('Are you sure you want to delete？')" OnClick="DelNewsImage_Click"  />
-          
+
+                    <h6>Upload Horizontal Group Image :</h6>
+                    <div>
+                        <asp:FileUpload ID="NewsImageUpload" runat="server" AllowMultiple="True" />
+                        <asp:Button ID="NewsImageBtn" runat="server" Text="Upload" class="bluebtn" OnClick="NewsImageBtn_Click" /><br />
+                        <asp:Label ID="NewsImageTip" runat="server" Text="" ForeColor="Red"></asp:Label>
+                    </div>
+                    <hr />
+                    <h6>News Image List :</h6>
+                    <asp:RadioButtonList ID="NewsImageRadioButtonList" runat="server" CellPadding="10" RepeatColumns="3" RepeatDirection="Horizontal"></asp:RadioButtonList>
+                    <asp:Button ID="DelNewsImage" runat="server" Text="Delete Image" type="button" class="redbtn" Style="margin-top: 10px" OnClientClick="return confirm('Are you sure you want to delete？')" OnClick="DelNewsImage_Click" Visible="False" />
+                    <asp:Label ID="DelNewsImageTip" runat="server" Text="" ForeColor="Red"></asp:Label>
 
                 </div>
             </div>
