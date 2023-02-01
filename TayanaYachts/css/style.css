@@ -17,7 +17,6 @@ body {
 
 .contain {
     width: 1002px;
-    
     margin-right: auto;
     margin-left: auto;
     font-family: Arial, Helvetica, sans-serif;
@@ -444,7 +443,6 @@ body {
 .title {
     float: left;
     width: 100%;
-
     background-image: url('../images/icon005.gif');
     background-repeat: no-repeat;
     border-bottom-width: 1px;
@@ -480,6 +478,7 @@ body {
     float: left;
     width: 66%;
 }
+
 .list02 a {
     color: #34a9d4;
     text-decoration: none;
@@ -510,6 +509,7 @@ body {
     width: 213px;
     background-color: #c7c7c7;
 }
+
     .left1 p span {
         padding-left: 30px;
         margin-top: 12px;
@@ -534,6 +534,7 @@ body {
         padding-top: 10px;
         padding-bottom: 10px;
     }
+
         .left1 a:hover {
             color: #34A9D4;
             background-color: #FFFFFF;
@@ -578,8 +579,8 @@ body, p, blockquote {
     float: left;
     margin-top: 5px;
 }
-.list01 li span, .list02 li span {
 
+.list01 li span, .list02 li span {
     background-image: url('../images/icon006.gif');
     background-repeat: no-repeat;
     background-position: 1px 7px;
@@ -587,6 +588,7 @@ body, p, blockquote {
     font-weight: bold;
     color: #34A9D4;
 }
+
 .list02 p {
     float: left;
     background-color: #FFFFFF;
@@ -594,12 +596,14 @@ body, p, blockquote {
     width: 209px;
     overflow: hidden;
 }
+
 .list02 li div {
     overflow: hidden;
     padding: 5px;
     border: 1px solid #CCCCCC;
     float: left;
 }
+
 .list02 li {
     float: left;
 }
@@ -617,22 +621,24 @@ body, p, blockquote {
     border-radius: 0.35rem;
     border: 2px solid rgb(52, 169, 212);
 }
+
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
 }
+
 .bluetop {
     background-color: rgb(52, 169, 212);
     width: 100%;
     height: 30px;
-    padding-top:10px;
-    
+    padding-top: 10px;
 }
+
     .bluetop p {
         color: white;
         font-size: 16px;
-        padding-left:20px;
+        padding-left: 20px;
     }
 
 .dealerinfor td, .dealerinfor th {
@@ -663,5 +669,103 @@ body, p, blockquote {
 
 
 .newscontent h6 {
-display:inline-block
+    display: inline-block
+}
+
+
+
+
+.list01 {
+    float: left;
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+    border-bottom-color: #CCCCCC;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+    .list01 a {
+        color: #34A9D4;
+        text-decoration: none;
+    }
+
+    .list01 li {
+        display: inline;
+    }
+
+        .list01 li div {
+            float: left;
+            overflow: hidden;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+div #pagination {
+    height: 50px;
+    margin-top: 3px;
+}
+
+    div#pagination .count {
+        float: left;
+        padding: 5px;
+    }
+
+    div#pagination .pages {
+        float: right;
+        padding: 5px;
+    }
+
+div#paginationTop .count {
+    float: left;
+    padding: 5px;
+}
+
+div#paginationTop .pages {
+    float: right;
+    padding: 5px;
+}
+
+div.pagination {
+    padding: 0px;
+    margin: 0px;
+}
+
+    div.pagination a {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #8dab68;
+        text-decoration: none; /* no underline */
+        color: #5f7f39;
+    }
+
+        div.pagination a:hover, div.pagination a:active {
+            border: 1px solid #5f7f39;
+            color: #000;
+        }
+
+    div.pagination span.current {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #5f7f39;
+        font-weight: bold;
+        background-color: #5f7f39;
+        color: #FFF;
+    }
+
+    div.pagination span.disabled {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #EEE;
+        color: #DDD;
+    }
+
+.bold14 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.rederror {
+    color: red;
 }

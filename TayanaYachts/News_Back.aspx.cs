@@ -469,81 +469,91 @@ namespace TayanaYachts
 
             if (NewsImageUpload.HasFile)
             {
-                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-                string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                int fileSize = NewsImageUpload.PostedFile.ContentLength; //Byte
+                if (fileSize < 1024 * 1000 * 100)
                 {
-                    newsimage = reader["NewsImage"].ToString();
-                }
-                connection.Close();
-
-
-
-                //設定存檔路徑
-                string SavePath = Server.MapPath("~/images/");
-                string FinalFileName;
-
-
-                //處理每個上傳檔案
-                foreach (HttpPostedFile postedFile in NewsImageUpload.PostedFiles)
-                {
-                    string FileName = postedFile.FileName;
-                    //檢查副檔名
-                    int x = FileName.LastIndexOf('.');
-                    string a = FileName.Remove(0, x);
-
-                    if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg")
+                    //撈出原本的圖片csv格式
+                    SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                    string sql = "SELECT NewsImage FROM News WHERE NewID= @NewID";
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
                     {
-                        NewsImageTip.Text += postedFile.FileName + " 非圖檔<br/>";                 
+                        newsimage = reader["NewsImage"].ToString();
                     }
-                    else
+                    connection.Close();
+
+
+
+                    //設定存檔路徑
+                    string SavePath = Server.MapPath("~/images/");
+                    string FinalFileName;
+
+
+                    //處理每個上傳檔案
+                    foreach (HttpPostedFile postedFile in NewsImageUpload.PostedFiles)
                     {
-                        //檢查檔名衝突
-                        string PathToCheck = SavePath + FileName;
-                        string TempFileName = "";
+                        string FileName = postedFile.FileName;
+                        //檢查副檔名
+                        int x = FileName.LastIndexOf('.');
+                        string a = FileName.Remove(0, x);
 
-                        if (File.Exists(PathToCheck))
+                        if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg")
                         {
-                            int count = 2;
-                            while (File.Exists(PathToCheck))
-                            {
-                                string[] FileNameSpilt = FileName.Split('.');
-                                TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
-                                PathToCheck = SavePath + TempFileName;
-                                count++;
-                            }
-                        }
-
-                        postedFile.SaveAs(PathToCheck);
-
-                        if (TempFileName != "")
-                        {
-                            FinalFileName = TempFileName;
+                            NewsImageTip.Text += postedFile.FileName + " 非圖檔<br/>";
                         }
                         else
                         {
-                            FinalFileName = FileName;
+                            //檢查檔名衝突
+                            string PathToCheck = SavePath + FileName;
+                            string TempFileName = "";
+
+                            if (File.Exists(PathToCheck))
+                            {
+                                int count = 2;
+                                while (File.Exists(PathToCheck))
+                                {
+                                    string[] FileNameSpilt = FileName.Split('.');
+                                    TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
+                                    PathToCheck = SavePath + TempFileName;
+                                    count++;
+                                }
+                            }
+
+                            postedFile.SaveAs(PathToCheck);
+
+                            if (TempFileName != "")
+                            {
+                                FinalFileName = TempFileName;
+                            }
+                            else
+                            {
+                                FinalFileName = FileName;
+                            }
+
+                            //把圖片以","隔開加進格式
+                            newsimage += "," + FinalFileName;
                         }
-
-                        newsimage += ","+FinalFileName;
                     }
+
+
+                    //寫入資料庫
+                    string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+                    command2.Parameters.AddWithValue("@NewsImage", newsimage.TrimStart(','));
+                    connection.Open();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+
+                    NewsImageData();
                 }
-
-
-                //寫入資料庫
-                string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
-                SqlCommand command2 = new SqlCommand(sql2, connection);
-                command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
-                command2.Parameters.AddWithValue("@NewsImage", newsimage.TrimStart(','));
-                connection.Open();
-                command2.ExecuteNonQuery();
-                connection.Close();
-
-                NewsImageData();
+                else
+                {
+                    NewsImageTip.Text = "The maximum upload size is 100MB!";
+                }
             }
             else
             {
@@ -699,65 +709,76 @@ namespace TayanaYachts
                 string SavePath = Server.MapPath("~/attachment/");
                 string FinalFileName;
 
-                foreach (HttpPostedFile postedFile in AttachmentFileUpload.PostedFiles)
+                int fileSize = AttachmentFileUpload.PostedFile.ContentLength; //Byte
+                if (fileSize < 1024 * 1000 * 100)
                 {
-                    string FileName = postedFile.FileName;
-                    //檢查副檔名
-                    int x = FileName.LastIndexOf('.');
-                    string a = FileName.Remove(0, x);
-                    if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg" && a != ".doc" && a != ".docx"
-                        && a != ".xls" && a != ".xlsx" && a != ".ppt" && a != ".pptx" && a != ".pdf" && a != ".bmp"
-                        && a != ".txt" && a != ".zip" && a != ".rar" && a != ".bmp")
-                    {              
-                        AttachmentTip.Text = postedFile.FileName+"type can't be accepted";
-                    }
-                    else
+
+                    foreach (HttpPostedFile postedFile in AttachmentFileUpload.PostedFiles)
                     {
-                        //檢查檔名衝突
-                        string PathToCheck = SavePath + FileName;
-                        string TempFileName = "";
-
-                        if (File.Exists(PathToCheck))
+                        string FileName = postedFile.FileName;
+                        //檢查副檔名
+                        int x = FileName.LastIndexOf('.');
+                        string a = FileName.Remove(0, x);
+                        if (a != ".jpg" && a != ".png" && a != ".gif" && a != ".jpeg" && a != ".doc" && a != ".docx"
+                            && a != ".xls" && a != ".xlsx" && a != ".ppt" && a != ".pptx" && a != ".pdf" && a != ".bmp"
+                            && a != ".txt" && a != ".zip" && a != ".rar" && a != ".bmp")
                         {
-                            int count = 2;
-                            while (File.Exists(PathToCheck))
-                            {
-                                string[] FileNameSpilt = FileName.Split('.');
-                                TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
-                                PathToCheck = SavePath + TempFileName;
-                                count++;
-                            }
-                        }
-
-                        postedFile.SaveAs(PathToCheck);
-
-                        if (TempFileName != "")
-                        {
-                            FinalFileName = TempFileName;
+                            AttachmentTip.Text = postedFile.FileName + "type can't be accepted";
                         }
                         else
                         {
-                            FinalFileName = FileName;
+                            //檢查檔名衝突
+                            string PathToCheck = SavePath + FileName;
+                            string TempFileName = "";
+
+                            if (File.Exists(PathToCheck))
+                            {
+                                int count = 2;
+                                while (File.Exists(PathToCheck))
+                                {
+                                    string[] FileNameSpilt = FileName.Split('.');
+                                    TempFileName = FileNameSpilt[0] + "_" + count.ToString() + a;
+                                    PathToCheck = SavePath + TempFileName;
+                                    count++;
+                                }
+                            }
+
+                            postedFile.SaveAs(PathToCheck);
+
+                            if (TempFileName != "")
+                            {
+                                FinalFileName = TempFileName;
+                            }
+                            else
+                            {
+                                FinalFileName = FileName;
+                            }
+
+                            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                            string sql = "INSERT INTO NewsAttachment(AttachmentName,NewID) VALUES(@AttachmentName,@NewID)";
+                            SqlCommand command = new SqlCommand(sql, connection);
+
+                            command.Parameters.AddWithValue("@AttachmentName", FinalFileName);
+                            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            connection.Close();
+
+
+
+
                         }
-
-                        SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-                        string sql = "INSERT INTO NewsAttachment(AttachmentName,NewID) VALUES(@AttachmentName,@NewID)";
-                        SqlCommand command = new SqlCommand(sql, connection);
-
-                        command.Parameters.AddWithValue("@AttachmentName", FinalFileName);
-                        command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
-                        
-                        connection.Open();
-                        command.ExecuteNonQuery(); 
-                        connection.Close();
-
-
-
-
                     }
+                    ShowAttachment();
+                    AttachmentTip.Text = "";
+
                 }
-                ShowAttachment();
-                AttachmentTip.Text = "";
+                else
+                {
+                    AttachmentTip.Text = "The maximum upload size is 100MB!";
+                }
+
             }
             else
             {

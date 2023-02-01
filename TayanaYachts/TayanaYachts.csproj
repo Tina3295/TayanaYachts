@@ -845,7 +845,9 @@
     <Content Include="images\yachts_2.jpg" />
     <Content Include="javascript\iepngfix_tilebg.js" />
     <Content Include="javascript\pngfix.js" />
+    <Content Include="News.aspx" />
     <Content Include="News_Back.aspx" />
+    <Content Include="Pagination.ascx" />
     <Content Include="Scripts\AC_RunActiveContent.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\CHANGES.html" />
@@ -1217,12 +1219,26 @@
     <Compile Include="Dealers_Back.aspx.designer.cs">
       <DependentUpon>Dealers_Back.aspx</DependentUpon>
     </Compile>
+    <Compile Include="News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
     <Compile Include="News_Back.aspx.cs">
       <DependentUpon>News_Back.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="News_Back.aspx.designer.cs">
       <DependentUpon>News_Back.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pagination.ascx.cs">
+      <DependentUpon>Pagination.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pagination.ascx.designer.cs">
+      <DependentUpon>Pagination.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">
