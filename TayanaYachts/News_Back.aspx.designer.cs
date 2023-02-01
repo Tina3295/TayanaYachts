@@ -60,6 +60,24 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Button AddTitle;
 
         /// <summary>
+        /// AddTitleTip 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AddTitleTip;
+
+        /// <summary>
+        /// NewsTitlePanel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel NewsTitlePanel;
+
+        /// <summary>
         /// NewsTitleRadioBtnList 控制項。
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace TayanaYachts
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList NewsTitleRadioBtnList;
+
+        /// <summary>
+        /// NewsAttachmentPanel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel NewsAttachmentPanel;
 
         /// <summary>
         /// AttachmentFileUpload 控制項。
@@ -114,13 +141,13 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Button DelAttachmentBtn;
 
         /// <summary>
-        /// NewsInfoHide 控制項。
+        /// NewsDetailPanel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NewsInfoHide;
+        protected global::System.Web.UI.WebControls.Panel NewsDetailPanel;
 
         /// <summary>
         /// Years 控制項。
@@ -292,14 +319,5 @@ namespace TayanaYachts
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DelNewsImage;
-
-        /// <summary>
-        /// DelNewsImageTip 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DelNewsImageTip;
     }
 }

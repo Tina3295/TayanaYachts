@@ -20,38 +20,57 @@ namespace TayanaYachts
             {
                 Calendar1.SelectedDate = Calendar1.TodaysDate;
                 LoadYears();
-
-                //loadDayNewsHeadline();
+                ShowNewsTitle();
+                if (NewsTitleRadioBtnList.Items.Count > 0)
+                {
+                    NewsTitlePanel.Visible = true;
+                }
+                else
+                {
+                    NewsTitlePanel.Visible = false;
+                }
             }
+
+
+
             FileBrowser fileBrowser = new FileBrowser();
             fileBrowser.BasePath = "/ckfinder";
             fileBrowser.SetupCKEditor(CKEditorControl);
-          
         }
 
         protected void AddTitle_Click(object sender, EventArgs e)
-        {   //隨機識別碼+秒
-            string guid = Guid.NewGuid().ToString().Trim() + DateTime.Now.ToString("ff");
-            string SelDate = Calendar1.SelectedDate.ToString("yyyy-M-dd");
+        {
+            if (AddNewsTitle.Text != "")
+            {
+                //隨機識別碼+秒
+                string guid = Guid.NewGuid().ToString().Trim() + DateTime.Now.ToString("ff");
+                string SelDate = Calendar1.SelectedDate.ToString("yyyy-M-dd");
 
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-            string sql = "INSERT INTO News (ReleaseDate, NewsTitle, Guid, IsTop) VALUES (@ReleaseDate, @NewsTitle, @Guid, @IsTop)";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@ReleaseDate", SelDate);
-            command.Parameters.AddWithValue("@NewsTitle", AddNewsTitle.Text);
-            command.Parameters.AddWithValue("@Guid", guid);
-            command.Parameters.AddWithValue("@IsTop", AddIsTop.Checked.ToString());
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+                string sql = "INSERT INTO News (ReleaseDate, NewsTitle, Guid, IsTop) VALUES (@ReleaseDate, @NewsTitle, @Guid, @IsTop)";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@ReleaseDate", SelDate);
+                command.Parameters.AddWithValue("@NewsTitle", AddNewsTitle.Text);
+                command.Parameters.AddWithValue("@Guid", guid);
+                command.Parameters.AddWithValue("@IsTop", AddIsTop.Checked.ToString());
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
 
-            //渲染畫面
-            NewsTitleRadioBtnList.Items.Clear();
-            ShowNewsTitle();
+                //渲染畫面
+                NewsTitleRadioBtnList.Items.Clear();
+                ShowNewsTitle();
+                NewsTitlePanel.Visible = true;
+                NewsDetailPanel.Visible = false;
+                NewsAttachmentPanel.Visible = false;
 
-
-
-            AddNewsTitle.Text = "";
+                AddNewsTitle.Text = "";
+                AddTitleTip.Text = "";
+            }
+            else
+            {
+                AddTitleTip.Text = "Please enter Title";
+            }
         }
 
 
@@ -83,16 +102,28 @@ namespace TayanaYachts
                 NewsTitleRadioBtnList.Items.Add(listItem);
             }
             connection.Close();
-
-            
+ 
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            //deleteNewsBtn.Visible = false;
-
+            
             NewsTitleRadioBtnList.Items.Clear();
             ShowNewsTitle();
+            if (NewsTitleRadioBtnList.Items.Count > 0)
+            {
+                NewsTitlePanel.Visible = true;
+            }
+            else
+            {
+                NewsTitlePanel.Visible = false;
+            }
+
+
+            NewsAttachmentPanel.Visible = false;
+            NewsDetailPanel.Visible = false;
+
+            TipClear();
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
@@ -153,10 +184,10 @@ namespace TayanaYachts
             //ddlDay.Items.FindByValue(System.DateTime.Now.Day.ToString()).Selected = true;// Set current date as selected
         }
 
-        protected void Years_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillDays();
-        }
+        //protected void Years_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    FillDays();
+        //}
         protected void Months_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillDays();
@@ -167,7 +198,26 @@ namespace TayanaYachts
             int year = Convert.ToInt32(CanlendarYear.SelectedItem.Text);
             int month = Convert.ToInt32(Calendar1.SelectedDate.Month);
             int day = Convert.ToInt32(Calendar1.SelectedDate.Day);
-            Calendar1.TodaysDate = new DateTime(year, month, day);
+
+
+            Calendar1.VisibleDate = new DateTime(year, month, day);
+            Calendar1.SelectedDate = new DateTime(year, month, day);
+
+
+            NewsDetailPanel.Visible = false;
+            NewsAttachmentPanel.Visible = false;
+            NewsTitleRadioBtnList.Items.Clear();
+            ShowNewsTitle();
+            if (NewsTitleRadioBtnList.Items.Count > 0)
+            {
+                NewsTitlePanel.Visible = true;
+            }
+            else
+            {
+                NewsTitlePanel.Visible = false;
+            }
+
+            TipClear();
         }
 
         protected void NewsTitleRadioBtnList_SelectedIndexChanged(object sender, EventArgs e)
@@ -199,6 +249,11 @@ namespace TayanaYachts
 
             NewsImageData();
             ShowAttachment();
+
+            NewsDetailPanel.Visible = true;
+            NewsAttachmentPanel.Visible = true;
+
+            TipClear();
         }
 
         protected void ThumbnailUploadBtn_Click(object sender, EventArgs e)
@@ -280,6 +335,7 @@ namespace TayanaYachts
                     connection.Close();
 
                     Thumbnailimg.ImageUrl = "/images/" + FinalFileName;
+                    ThumbnailUploadTip.Text = "";
                 }
             }
             else
@@ -320,7 +376,7 @@ namespace TayanaYachts
                         ListItem listItem = new ListItem($"<img src='/images/{item}' style='margin:10px' width='230px'/>", item);
                         NewsImageRadioButtonList.Items.Add(listItem);
                     }
-                    DelNewsImage.Visible = true;
+                    
                 }
             }
             connection.Close();
@@ -399,11 +455,9 @@ namespace TayanaYachts
 
 
                 NewsImageData();
+                DelNewsImage.Visible = false;
             }
-            else
-            {
-                DelNewsImageTip.Text = "There's no chosed image!";
-            }
+
         }
 
 
@@ -484,13 +538,12 @@ namespace TayanaYachts
                 string sql2 = "Update News set NewsImage =@NewsImage WHERE NewID= @NewID";
                 SqlCommand command2 = new SqlCommand(sql2, connection);
                 command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
-                command2.Parameters.AddWithValue("@NewsImage", newsimage);
+                command2.Parameters.AddWithValue("@NewsImage", newsimage.TrimStart(','));
                 connection.Open();
                 command2.ExecuteNonQuery();
                 connection.Close();
 
                 NewsImageData();
-
             }
             else
             {
@@ -531,16 +584,109 @@ namespace TayanaYachts
             //DealerRadioButtonList.SelectedItem.Text = Area.Text.ToString();
         }
 
+        //刪除整則新聞
         protected void DeleteNews_Click(object sender, EventArgs e)
         {
+            //刪附件(實際檔案、
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-            SqlCommand command = new SqlCommand($"DELETE  FROM News WHERE (NewID = @NewID)", connection);
-            command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            string sql = "SELECT AttachmentName FROM NewsAttachment WHERE NewID = @NewID";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("NewID", NewsTitleRadioBtnList.SelectedValue);
             connection.Open();
-            command.ExecuteNonQuery();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string delFileName = reader["AttachmentName"].ToString();
+                //有舊圖才執行刪除
+                if (!String.IsNullOrEmpty(delFileName))
+                {
+                    File.Delete(Server.MapPath("~/attachment/") + delFileName);
+                }  
+            }
             connection.Close();
 
+
+            //資料庫資料)
+            SqlCommand command2 = new SqlCommand($"DELETE  FROM NewsAttachment WHERE NewID = @NewID", connection);
+            command2.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            command2.ExecuteNonQuery();
+            connection.Close();
+
+
+            //刪實際縮圖
+            string sql3 = "SELECT Thumbnail FROM News WHERE NewID = @NewID";
+            SqlCommand command3 = new SqlCommand(sql3, connection);
+            command3.Parameters.AddWithValue("NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader3 = command3.ExecuteReader();
+            if (reader3.Read())
+            {
+                string delFileName = reader3["Thumbnail"].ToString();
+                //有舊圖才執行刪除
+                if (!String.IsNullOrEmpty(delFileName))
+                {
+                    File.Delete(Server.MapPath("~/images/") + delFileName);
+                }     
+            }
+            connection.Close();
+
+
+
+
+
+            //刪多圖
+            string sql4 = "SELECT NewsImage FROM News WHERE NewID = @NewID";
+            SqlCommand command4 = new SqlCommand(sql4, connection);
+            command4.Parameters.AddWithValue("NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader4 = command4.ExecuteReader();
+            if (reader4.Read())
+            {
+                string delFileName = reader4["NewsImage"].ToString();
+                //有舊圖才執行刪除
+                if (!String.IsNullOrEmpty(delFileName))
+                {
+                    if (delFileName.Contains(","))
+                    {
+                        string[] imgnames = delFileName.Split(',');
+                        foreach (string imgname in imgnames)
+                        {
+                            File.Delete(Server.MapPath("~/images/") + imgname);
+                        }
+                    }
+                    else
+                    {
+                        File.Delete(Server.MapPath("~/images/") + delFileName);
+                    }            
+                }
+            }
+            connection.Close();
+
+
+
+
+
+
+
+            SqlCommand command5 = new SqlCommand($"DELETE  FROM News WHERE (NewID = @NewID)", connection);
+            command5.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
+            connection.Open();
+            command5.ExecuteNonQuery();
+            connection.Close();
+
+            
             ShowNewsTitle();
+            if (NewsTitleRadioBtnList.Items.Count > 0)
+            {
+                NewsTitlePanel.Visible = true;
+            }
+            else
+            {
+                NewsTitlePanel.Visible = false;
+            }
+            NewsDetailPanel.Visible = false;
+            NewsAttachmentPanel.Visible = false;
         }
 
 
@@ -611,6 +757,7 @@ namespace TayanaYachts
                     }
                 }
                 ShowAttachment();
+                AttachmentTip.Text = "";
             }
             else
             {
@@ -681,8 +828,29 @@ namespace TayanaYachts
 
 
             ShowAttachment();
+            DelAttachmentBtn.Visible = false;
+        }
 
-           
+        protected void AttachmentRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DelAttachmentBtn.Visible = true;
+        }
+
+        protected void NewsImageRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DelNewsImage.Visible = true;
+        }
+
+
+
+
+
+        protected void TipClear()
+        {
+            AddTitleTip.Text = "";
+            AttachmentTip.Text = "";
+            ThumbnailUploadTip.Text = "";
+            NewsImageTip.Text = "";
         }
     }
 
