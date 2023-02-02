@@ -769,3 +769,64 @@ div.pagination {
 .rederror {
     color: red;
 }
+
+.from01 {
+    float: left;
+    width: 92%;
+    background-color: #f0f0f0;
+    padding: 4%;
+    margin-bottom: 20px;
+}
+    .from01 table {
+        border: 1px solid #34a9d4;
+        width: 100%;
+        background-color: #FFFFFF;
+    }
+    .from01 table td {
+        border: 1px solid #34a9d4;
+        padding-top: 7px;
+        padding-right: 5px;
+        padding-bottom: 7px;
+        padding-left: 5px;
+    }
+    .from01 td span {
+        color: #34A9D4;
+        padding-right: 5px;
+    }
+.from01td01 {
+    text-align: right;
+    width: 100px;
+}
+.span01 {
+    color: #4BB3D9;
+    padding-left: 10px;
+}
+
+.box1 {
+    float: left;
+    width: 100%;
+    text-align: justify;
+}
+.span02 {
+    font-weight: bold;
+}
+.list03 p {
+    background-image: url('../images/icon006.gif');
+    background-repeat: no-repeat;
+    background-position: 1px 8px;
+    padding-left: 10px;
+    float: left;
+}
+    .list03 p span {
+        color: #34A9D4;
+    }
+.box4 {
+    float: left;
+    width: 100%;
+    line-height: 170%;
+    border-top-width: 1px;
+    border-top-style: dashed;
+    border-top-color: #b3b3b3;
+    padding-top: 15px;
+    margin-top: 15px;
+}
