@@ -1,0 +1,208 @@
+@charset "utf-8";
+
+@import url("js.css");
+
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+.card p {
+    font-size: 14px;
+    color: #5a5c69
+}
+
+.bluetop {
+    background-color: rgb(52, 169, 212);
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+}
+
+    .bluetop p {
+        color: white;
+        font-size: 16px;
+        padding-left: 20px;
+    }
+
+.dealerinfor td, .dealerinfor th {
+    border-bottom: 2px solid rgb(52, 169, 212);
+    padding: 15px 0;
+}
+
+.bluebtn {
+    border: 1px solid rgba(0,0,0,0.21);
+    border-radius: 6px;
+    color: white;
+    padding: 8px 15px;
+    background-color: #4e73df;
+    ;
+}
+
+.redbtn {
+    border: 1px solid rgba(0,0,0,0.21);
+    border-radius: 6px;
+    color: white;
+    padding: 8px 15px;
+    background-color: rgba(250,90,90,1);
+}
+
+.rightguide {
+    color: rgb(52, 169, 212);
+}
+
+
+
+.newscontent h6 {
+    display: inline-block
+}
+
+
+
+
+
+div #pagination {
+    height: 50px;
+    margin-top: 3px;
+}
+
+    div#pagination .count {
+        float: left;
+        padding: 5px;
+    }
+
+    div#pagination .pages {
+        float: right;
+        padding: 5px;
+    }
+
+div#paginationTop .count {
+    float: left;
+    padding: 5px;
+}
+
+div#paginationTop .pages {
+    float: right;
+    padding: 5px;
+}
+
+div.pagination {
+    padding: 0px;
+    margin: 0px;
+}
+
+    div.pagination a {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #8dab68;
+        text-decoration: none; /* no underline */
+        color: #5f7f39;
+    }
+
+        div.pagination a:hover, div.pagination a:active {
+            border: 1px solid #5f7f39;
+            color: #000;
+        }
+
+    div.pagination span.current {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #5f7f39;
+        font-weight: bold;
+        background-color: #5f7f39;
+        color: #FFF;
+    }
+
+    div.pagination span.disabled {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #EEE;
+        color: #DDD;
+    }
+
+.bold14 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.rederror {
+    color: red;
+}
+
+.from01 {
+    float: left;
+    width: 92%;
+    background-color: #f0f0f0;
+    padding: 4%;
+    margin-bottom: 20px;
+}
+    .from01 table {
+        border: 1px solid #34a9d4;
+        width: 100%;
+        background-color: #FFFFFF;
+    }
+    .from01 table td {
+        border: 1px solid #34a9d4;
+        padding-top: 7px;
+        padding-right: 5px;
+        padding-bottom: 7px;
+        padding-left: 5px;
+    }
+    .from01 td span {
+        color: #34A9D4;
+        padding-right: 5px;
+    }
+.from01td01 {
+    text-align: right;
+    width: 100px;
+}
+.span01 {
+    color: #4BB3D9;
+    padding-left: 10px;
+}
+
+.box1 {
+    float: left;
+    width: 100%;
+    text-align: justify;
+}
+.span02 {
+    font-weight: bold;
+}
+.list03 p {
+    background-image: url('../images/icon006.gif');
+    background-repeat: no-repeat;
+    background-position: 1px 8px;
+    padding-left: 10px;
+    float: left;
+}
+    .list03 p span {
+        color: #34A9D4;
+    }
+.box4 {
+    float: left;
+    width: 100%;
+    line-height: 170%;
+    border-top-width: 1px;
+    border-top-style: dashed;
+    border-top-color: #b3b3b3;
+    padding-top: 15px;
+    margin-top: 15px;
+}
