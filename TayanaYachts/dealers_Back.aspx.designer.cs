@@ -11,7 +11,7 @@ namespace TayanaYachts
 {
 
 
-    public partial class dealers_Back
+    public partial class Dealers_Back
     {
 
         /// <summary>

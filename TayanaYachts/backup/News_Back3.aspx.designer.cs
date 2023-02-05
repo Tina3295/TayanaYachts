@@ -11,7 +11,7 @@ namespace TayanaYachts
 {
 
 
-    public partial class News_Back
+    public partial class News_Back3
     {
 
         /// <summary>

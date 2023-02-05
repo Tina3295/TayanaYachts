@@ -758,6 +758,7 @@
     <Content Include="css\add.css" />
     <Content Include="css\style.css" />
     <Content Include="Dealers.aspx" />
+    <Content Include="backup\Dealers_Back3.aspx" />
     <Content Include="Dealers_Back.aspx" />
     <Content Include="images\1.jfif" />
     <Content Include="images\2.jpg" />
@@ -894,6 +895,7 @@
     <Content Include="javascript\sb-admin-2.js" />
     <Content Include="javascript\sb-admin-2.min.js" />
     <Content Include="News.aspx" />
+    <Content Include="backup\News_Back3.aspx" />
     <Content Include="News_Back.aspx" />
     <Content Include="Pagination.ascx" />
     <Content Include="RecaptchaNet.Readme.txt" />
@@ -2921,6 +2923,7 @@
     <Content Include="vendor\jquery\jquery.slim.js" />
     <Content Include="vendor\jquery\jquery.slim.min.js" />
     <Content Include="Web.config" />
+    <Content Include="Yachts_Back.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Back.Master.cs">
@@ -2958,6 +2961,13 @@
     <Compile Include="Dealers.aspx.designer.cs">
       <DependentUpon>Dealers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="backup\Dealers_Back3.aspx.cs">
+      <DependentUpon>Dealers_Back3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backup\Dealers_Back3.aspx.designer.cs">
+      <DependentUpon>Dealers_Back3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dealers_Back.aspx.cs">
       <DependentUpon>Dealers_Back.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2971,6 +2981,13 @@
     </Compile>
     <Compile Include="News.aspx.designer.cs">
       <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backup\News_Back3.aspx.cs">
+      <DependentUpon>News_Back3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backup\News_Back3.aspx.designer.cs">
+      <DependentUpon>News_Back3.aspx</DependentUpon>
     </Compile>
     <Compile Include="News_Back.aspx.cs">
       <DependentUpon>News_Back.aspx</DependentUpon>
@@ -2995,6 +3012,13 @@
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="Userinformation.cs" />
+    <Compile Include="Yachts_Back.aspx.cs">
+      <DependentUpon>Yachts_Back.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Yachts_Back.aspx.designer.cs">
+      <DependentUpon>Yachts_Back.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\Thumbs.db" />

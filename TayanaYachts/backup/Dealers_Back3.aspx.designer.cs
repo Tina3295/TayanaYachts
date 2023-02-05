@@ -11,242 +11,215 @@ namespace TayanaYachts
 {
 
 
-    public partial class News_Back
+    public partial class Dealers_Back3
     {
 
         /// <summary>
-        /// CanlendarYear 控制項。
+        /// AddCountryTextBox 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CanlendarYear;
+        protected global::System.Web.UI.WebControls.TextBox AddCountryTextBox;
 
         /// <summary>
-        /// Calendar1 控制項。
+        /// AddCountry 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Button AddCountry;
 
         /// <summary>
-        /// AddNewsTitle 控制項。
+        /// AddCountryTip 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AddNewsTitle;
+        protected global::System.Web.UI.WebControls.Label AddCountryTip;
 
         /// <summary>
-        /// AddIsTop 控制項。
+        /// GridView1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox AddIsTop;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// AddTitle 控制項。
+        /// CountryDropDownList 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddTitle;
+        protected global::System.Web.UI.WebControls.DropDownList CountryDropDownList;
 
         /// <summary>
-        /// AddTitleTip 控制項。
+        /// DealerRadioButtonList 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AddTitleTip;
+        protected global::System.Web.UI.WebControls.RadioButtonList DealerRadioButtonList;
 
         /// <summary>
-        /// NewsTitlePanel 控制項。
+        /// AddAreaTextBox 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NewsTitlePanel;
+        protected global::System.Web.UI.WebControls.TextBox AddAreaTextBox;
 
         /// <summary>
-        /// NewsTitleRadioBtnList 控制項。
+        /// AddArea 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList NewsTitleRadioBtnList;
+        protected global::System.Web.UI.WebControls.Button AddArea;
 
         /// <summary>
-        /// NewsAttachmentPanel 控制項。
+        /// AddAreaTip 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NewsAttachmentPanel;
+        protected global::System.Web.UI.WebControls.Label AddAreaTip;
 
         /// <summary>
-        /// AttachmentFileUpload 控制項。
+        /// DealerInfoHide 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload AttachmentFileUpload;
+        protected global::System.Web.UI.WebControls.Panel DealerInfoHide;
 
         /// <summary>
-        /// AttachmentBtn 控制項。
+        /// Agentimg 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AttachmentBtn;
+        protected global::System.Web.UI.WebControls.Image Agentimg;
 
         /// <summary>
-        /// AttachmentTip 控制項。
+        /// AgentimgUpload 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AttachmentTip;
+        protected global::System.Web.UI.WebControls.FileUpload AgentimgUpload;
 
         /// <summary>
-        /// AttachmentRadioButtonList 控制項。
+        /// AgentimgUploadBtn 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList AttachmentRadioButtonList;
+        protected global::System.Web.UI.WebControls.Button AgentimgUploadBtn;
 
         /// <summary>
-        /// DelAttachmentBtn 控制項。
+        /// AgentimgUploadTip 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DelAttachmentBtn;
+        protected global::System.Web.UI.WebControls.Label AgentimgUploadTip;
 
         /// <summary>
-        /// NewsDetailPanel 控制項。
+        /// Country 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NewsDetailPanel;
+        protected global::System.Web.UI.WebControls.TextBox Country;
 
         /// <summary>
-        /// Years 控制項。
+        /// Area 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Years;
+        protected global::System.Web.UI.WebControls.TextBox Area;
 
         /// <summary>
-        /// Months 控制項。
+        /// Name 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Months;
+        protected global::System.Web.UI.WebControls.TextBox Name;
 
         /// <summary>
-        /// Days 控制項。
+        /// Contact 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Days;
+        protected global::System.Web.UI.WebControls.TextBox Contact;
 
         /// <summary>
-        /// IsTop 控制項。
+        /// Address 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox IsTop;
+        protected global::System.Web.UI.WebControls.TextBox Address;
 
         /// <summary>
-        /// Thumbnailimg 控制項。
+        /// TEL 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Thumbnailimg;
+        protected global::System.Web.UI.WebControls.TextBox TEL;
 
         /// <summary>
-        /// ThumbnailUpload 控制項。
+        /// Fax 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ThumbnailUpload;
+        protected global::System.Web.UI.WebControls.TextBox Fax;
 
         /// <summary>
-        /// ThumbnailUploadBtn 控制項。
+        /// Email 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ThumbnailUploadBtn;
+        protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
-        /// ThumbnailUploadTip 控制項。
+        /// Link 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ThumbnailUploadTip;
-
-        /// <summary>
-        /// NewsTitle 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NewsTitle;
-
-        /// <summary>
-        /// Summary 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Summary;
-
-        /// <summary>
-        /// CKEditorControl 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::CKEditor.NET.CKEditorControl CKEditorControl;
+        protected global::System.Web.UI.WebControls.TextBox Link;
 
         /// <summary>
         /// InitDate 控制項。
@@ -258,66 +231,21 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Label InitDate;
 
         /// <summary>
-        /// UpdateNews 控制項。
+        /// UpdateAgent 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateNews;
+        protected global::System.Web.UI.WebControls.Button UpdateAgent;
 
         /// <summary>
-        /// DeleteNews 控制項。
+        /// DeleteAgent 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DeleteNews;
-
-        /// <summary>
-        /// NewsImageUpload 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload NewsImageUpload;
-
-        /// <summary>
-        /// NewsImageBtn 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button NewsImageBtn;
-
-        /// <summary>
-        /// NewsImageTip 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NewsImageTip;
-
-        /// <summary>
-        /// NewsImageRadioButtonList 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList NewsImageRadioButtonList;
-
-        /// <summary>
-        /// DelNewsImage 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DelNewsImage;
+        protected global::System.Web.UI.WebControls.Button DeleteAgent;
     }
 }

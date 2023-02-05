@@ -84,58 +84,36 @@
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <asp:Panel ID="AlbumHide" runat="server">
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        <a class="nav-link collapsed" href="News_Back.aspx"
                             aria-expanded="true" aria-controls="collapseUtilities">
 
                             <img src="images/newspaper.png" class="fas fa-fw fa-wrench" style="margin-right: 10px" />
                             <span>News</span>
                         </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                            data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">System Side:</h6>
-                                <a class="collapse-item" href="Album_Front_Index.aspx">前台</a>
-                                <a class="collapse-item" href="Album_Back_Index.aspx">後台</a>
-
-                            </div>
-                        </div>
+                        
                     </li>
                 </asp:Panel>
 
 
-                <asp:Panel ID="FAQHide" runat="server">
+                <asp:Panel ID="CompanyHide" runat="server">
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                            aria-expanded="true" aria-controls="collapseThree">
+                        <a class="nav-link collapsed" href="Company_Back.aspx" >
 
                             <img src="images/office-building.png" class="fas fa-fw fa-cog" style="margin-right: 10px" />
                             <span>Company</span>
                         </a>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">System Side:</h6>
-                                <a class="collapse-item" href="FAQ_Front_Index.aspx">前台</a>
-                                <a class="collapse-item" href="FAQ_Back_Index.aspx">後台</a>
-                            </div>
-                        </div>
+                       
                     </li>
                 </asp:Panel>
 
                 <asp:Panel ID="LinkHide" runat="server">
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                            aria-expanded="true" aria-controls="collapseFour">
+                        <a class="nav-link collapsed" href="Dealers_Back.aspx" >
 
                             <img src="images/handshake.png" class="fas fa-fw fa-cog" style="margin-right: 10px" />
                             <span>Dealers</span>
                         </a>
-                        <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">System Side:</h6>
-                                <a class="collapse-item" href="RelatedLink_Front_Index.aspx">前台</a>
-                                <a class="collapse-item" href="RelatedLink_Back_Index.aspx">後台</a>
-                            </div>
-                        </div>
+                        
                     </li>
                 </asp:Panel>
 
@@ -373,7 +351,7 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <asp:Label ID="Name" runat="server" Text="待有" class="mr-2 d-none d-lg-inline text-gray-600 small"></asp:Label>
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="images/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

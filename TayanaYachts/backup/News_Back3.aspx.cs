@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace TayanaYachts
 {
-    public partial class News_Back : System.Web.UI.Page
+    public partial class News_Back3 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -102,12 +102,12 @@ namespace TayanaYachts
                 NewsTitleRadioBtnList.Items.Add(listItem);
             }
             connection.Close();
-
+ 
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-
+            
             NewsTitleRadioBtnList.Items.Clear();
             ShowNewsTitle();
             if (NewsTitleRadioBtnList.Items.Count > 0)
@@ -241,7 +241,7 @@ namespace TayanaYachts
                 IsTop.Checked = Convert.ToBoolean(reader["IsTop"]);
                 Summary.Text = reader["Summary"].ToString();
                 CKEditorControl.Text = Server.HtmlDecode(reader["NewsContentHtml"].ToString());
-
+               
 
                 InitDate.Text = reader["InitDate"].ToString();
             }
@@ -376,7 +376,7 @@ namespace TayanaYachts
                         ListItem listItem = new ListItem($"<img src='/images/{item}' style='margin:10px' width='230px'/>", item);
                         NewsImageRadioButtonList.Items.Add(listItem);
                     }
-
+                    
                 }
             }
             connection.Close();
@@ -464,7 +464,7 @@ namespace TayanaYachts
 
         protected void NewsImageBtn_Click(object sender, EventArgs e)
         {//上傳多圖
-            string newsimage = "";
+            string newsimage="";
             NewsImageTip.Text = "";
 
             if (NewsImageUpload.HasFile)
@@ -577,7 +577,7 @@ namespace TayanaYachts
             command.Parameters.AddWithValue("@Summary", Summary.Text.ToString());
             command.Parameters.AddWithValue("@IsTop", IsTop.Checked);
             command.Parameters.AddWithValue("@NewsContentHtml", HttpUtility.HtmlEncode(CKEditorControl.Text).ToString());
-
+            
             command.Parameters.AddWithValue("@NewID", NewsTitleRadioBtnList.SelectedValue);
 
             connection.Open();
@@ -589,8 +589,8 @@ namespace TayanaYachts
             //讓日曆跳到改的日期
             Calendar1.SelectedDates.Clear();
             Calendar1.SelectedDate = releasedate;
-            Calendar1.VisibleDate = releasedate;
-            ShowNewsTitle();
+            Calendar1.VisibleDate =releasedate;
+             ShowNewsTitle();
             //DealerRadioButtonList.SelectedItem.Text = Area.Text.ToString();
         }
 
@@ -611,7 +611,7 @@ namespace TayanaYachts
                 if (!String.IsNullOrEmpty(delFileName))
                 {
                     File.Delete(Server.MapPath("~/attachment/") + delFileName);
-                }
+                }  
             }
             connection.Close();
 
@@ -637,7 +637,7 @@ namespace TayanaYachts
                 if (!String.IsNullOrEmpty(delFileName))
                 {
                     File.Delete(Server.MapPath("~/images/") + delFileName);
-                }
+                }     
             }
             connection.Close();
 
@@ -668,7 +668,7 @@ namespace TayanaYachts
                     else
                     {
                         File.Delete(Server.MapPath("~/images/") + delFileName);
-                    }
+                    }            
                 }
             }
             connection.Close();
@@ -685,7 +685,7 @@ namespace TayanaYachts
             command5.ExecuteNonQuery();
             connection.Close();
 
-
+            
             ShowNewsTitle();
             if (NewsTitleRadioBtnList.Items.Count > 0)
             {
@@ -874,4 +874,5 @@ namespace TayanaYachts
             NewsImageTip.Text = "";
         }
     }
+
 }

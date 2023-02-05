@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TayanaYachts
 {
-    public partial class Dealers_Back : System.Web.UI.Page
+    public partial class Dealers_Back3 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,7 +82,6 @@ namespace TayanaYachts
             }
             else
             {
-                AddCountryTip.Visible = true;
                 AddCountryTip.Text = "Please enter country!";
             }
         }
@@ -192,13 +191,11 @@ namespace TayanaYachts
                 }
                 else
                 {
-                    AddAreaTip.Visible = true;
                     AddAreaTip.Text = "Please choose country of area!";
                 }
             }
             else
             {
-                AddAreaTip.Visible = true;
                 AddAreaTip.Text = "Please enter area!";
             }
         }
@@ -231,8 +228,6 @@ namespace TayanaYachts
 
             Country.Text = CountryDropDownList.SelectedItem.Text;
             DealerInfoHide.Visible = true;
-
-            TipHide();
         }
 
         //protected void DealerRadio()
@@ -262,7 +257,6 @@ namespace TayanaYachts
         protected void CountryDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {//隨著選擇地區變換顯示詳細資訊
             Dealer();
-            TipHide();
         }
 
         protected void DeleteAgent_Click(object sender, EventArgs e)
@@ -311,7 +305,7 @@ namespace TayanaYachts
 
             if (AgentimgUpload.HasFile)
             {
-
+                
                 string SavePath = Server.MapPath("~/images/");
                 string FinalFileName;
                 string FileName = AgentimgUpload.FileName;
@@ -390,20 +384,8 @@ namespace TayanaYachts
             }
             else
             {
-                AgentimgUploadTip.Visible = true;
                 AgentimgUploadTip.Text = "There's no file to upload!";
             }
-        }
-
-
-
-
-
-        protected void TipHide()
-        {
-            AgentimgUploadTip.Visible = false;
-            AddCountryTip.Visible = false;
-            AddAreaTip.Visible = false;
         }
     }
 }

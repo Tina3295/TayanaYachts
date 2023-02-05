@@ -42,7 +42,8 @@
     }
 
 .dealerinfor td, .dealerinfor th {
-    border-bottom: 2px solid rgb(52, 169, 212);
+    border-bottom: 2px solid #4e73df;
+    
     padding: 15px 0;
 }
 
@@ -170,7 +171,7 @@ div.pagination {
         padding-right: 5px;
     }
 .from01td01 {
-    text-align: right;
+
     width: 100px;
 }
 .span01 {
