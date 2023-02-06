@@ -388,7 +388,6 @@ namespace TayanaYachts
             if (NewsImageRadioButtonList.SelectedValue.ToString() != "")
             {
 
-
                 string delimage = NewsImageRadioButtonList.SelectedValue;
                 string selecttitle = NewsTitleRadioBtnList.SelectedValue;
 

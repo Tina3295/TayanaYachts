@@ -207,3 +207,12 @@ div.pagination {
     padding-top: 15px;
     margin-top: 15px;
 }
+
+
+
+::placeholder {
+    color: #D0D0D0;
+}
+.firstbannerimage {
+    border: 3px solid #36b9cc;
+}
