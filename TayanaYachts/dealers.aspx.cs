@@ -104,7 +104,7 @@ namespace TayanaYachts
                 string link = reader["Link"].ToString();
 
 
-                DealerInfo.Text += "<li> <div class=\"list02\"><ul><li class=\"list02li\"><div><p><img src=\"" + imageurl + "\"></p></div></li><li>";
+                DealerInfo.Text += "<li> <div class=\"list02\"><ul><li class=\"list02li\"><div><p><img width='100%' src=\"" + imageurl + "\"></p></div></li><li>";
                 DealerInfo.Text += "<span>" + area + "</span><br>";
                 if (!string.IsNullOrEmpty(name))
                 {

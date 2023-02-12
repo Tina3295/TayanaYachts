@@ -32,7 +32,7 @@
                             </div>
                             <br />
                             <div Style="text-align:center">
-                            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="100%"   OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
+                            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="100%"   OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender" OnVisibleMonthChanged="Calendar1_VisibleMonthChanged">
                                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
                                 <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" />
                                 <OtherMonthDayStyle ForeColor="#999999" />
@@ -268,6 +268,9 @@
                                 <div style="display: inline-block">
                                     <asp:Button ID="DeleteNews" Class="redbtn" runat="server" Text="Delete" OnClientClick="javascript:if(!window.confirm('Are you sure you want to delete？')) window.event.returnValue = false;" OnClick="DeleteNews_Click" />
                                 </div>
+                            </div>
+                            <div Style="text-align:center">
+                            <asp:Label ID="UpdateNewsTip" runat="server" Text="" ForeColor="red" ></asp:Label>
                             </div>
 
 

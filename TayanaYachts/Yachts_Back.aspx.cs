@@ -92,7 +92,7 @@ namespace TayanaYachts
             ModelRadioBtnList.Items.Clear();
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-            string sql = "SELECT YachtModel,NewDesign,NewBuilding FROM Yachts ORDER BY NewBuilding DESC,NewDesign DESC,YachtModel";
+            string sql = "SELECT YachtModel,NewDesign,NewBuilding FROM Yachts ORDER BY YachtModel";
             SqlCommand command = new SqlCommand(sql, connection);
          
             connection.Open();
@@ -173,7 +173,7 @@ namespace TayanaYachts
             string modelName = ModelName.Text;
             string modelNum = ModelNum.Text;
 
-            if (!string.IsNullOrEmpty(modelName) && !string.IsNullOrEmpty(modelNum))
+            if (!string.IsNullOrWhiteSpace(modelName) && !string.IsNullOrWhiteSpace(modelNum))
             {
 
                 //比對名字重複
@@ -266,9 +266,91 @@ namespace TayanaYachts
 
 
 
-        protected void DeleteModelBtn_Click(object sender, EventArgs e)
+        protected void DeleteModelBtn_Click(object sender, EventArgs e)   
         {
+            string id="",bannerimg="", layoutimg="";
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
+            string sql = "SELECT * FROM Yachts where YachtModel=@YachtModel";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@YachtModel", ModelRadioBtnList.SelectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                id = reader["YachtID"].ToString();
+                bannerimg=reader["BannerImg"].ToString();
+                layoutimg = reader["LayoutImg"].ToString();
+            }
+            connection.Close();
+
+            //刪除附件實際檔
+            string sql2 = "SELECT AttachmentName FROM Yachtsattachment where YachtID=@YachtID";
+            SqlCommand command2 = new SqlCommand(sql2, connection);
+            command2.Parameters.AddWithValue("@YachtID", id);
+            connection.Open();
+            SqlDataReader reader2 = command2.ExecuteReader();
+            while (reader2.Read())
+            {
+                File.Delete(Server.MapPath("~/attachment/") + reader2["AttachmentName"].ToString());
+            }
+            connection.Close();
+
+
+            //刪除附件資料庫
+            SqlCommand command3 = new SqlCommand($"DELETE  FROM YachtsAttachment WHERE (YachtID = @YachtID)", connection);
+            command3.Parameters.AddWithValue("@YachtID", id);
+            connection.Open();
+            command3.ExecuteNonQuery();
+            connection.Close();
+
+
+
+
+            //刪除BannerImg實際圖
+            if (!string.IsNullOrEmpty(bannerimg))
+            {
+                try
+                {
+                    string[] bannerimages = bannerimg.Split(',');
+                    foreach (string img in bannerimages)
+                    {
+                        File.Delete(Server.MapPath("~/images/") + img);
+                    }
+                }
+                catch
+                {
+                    File.Delete(Server.MapPath("~/images/") + bannerimg);
+                }
+            }
+
+            //刪除Layout實際圖
+            if (!string.IsNullOrEmpty(layoutimg))
+            {
+                try
+                {
+                    string[] layoutimages = layoutimg.Split(',');
+                    foreach (string img in layoutimages)
+                    {
+                        File.Delete(Server.MapPath("~/images/") + img);
+                    }
+                }
+                catch
+                {
+                    File.Delete(Server.MapPath("~/images/") + layoutimg);
+                }
+            }
+
+            //刪整筆資料
+            SqlCommand command4 = new SqlCommand($"DELETE  FROM Yachts WHERE (YachtID = @YachtID)", connection);
+            command4.Parameters.AddWithValue("@YachtID", id);
+            connection.Open();
+            command4.ExecuteNonQuery();
+            connection.Close();
+
+            //渲染畫面
+            ShowModel();
+            ModelUpdatePanel.Visible = false;
         }
 
 
@@ -302,7 +384,7 @@ namespace TayanaYachts
                     }
                     connection.Close();
 
-                    //第一次上傳先指定第一張當FirstBannerImg
+                    //判斷是否第一次上傳,要指定第一張當FirstBannerImg
                     bool haveimg=true;
                     if (string.IsNullOrEmpty(image))
                     {
@@ -477,15 +559,25 @@ namespace TayanaYachts
                 //實際刪除圖檔
                 File.Delete(Server.MapPath("~/images/") + delimage);
 
-                //更新資料庫
+
+                //去比對是否被指定為FirstBannerImg     //更新資料庫
+                bool isfirst = false;
+  
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-                string sql = "SELECT BannerImg FROM Yachts WHERE YachtModel= @YachtModel";
+                string sql = "SELECT BannerImg,FirstBannerImg FROM Yachts WHERE YachtModel= @YachtModel";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@YachtModel", selectmodel);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
+                    if (reader["FirstBannerImg"].ToString() == delimage)
+                    {
+                        isfirst = true;
+                    }
+
+
+
                     string image = reader["BannerImg"].ToString();
 
                     try
@@ -512,24 +604,51 @@ namespace TayanaYachts
 
 
 
-                if (saveimages != "")
+                if (saveimages != "")   //刪圖之後還有圖
                 {
-                    string sql2 = "Update Yachts set BannerImg =@BannerImg WHERE YachtModel= @YachtModel";
-                    SqlCommand command2 = new SqlCommand(sql2, connection);
-                    command2.Parameters.AddWithValue("@YachtModel", selectmodel);
-                    command2.Parameters.AddWithValue("@BannerImg", saveimages.TrimEnd(','));
+                    string sql3 = "Update Yachts set BannerImg =@BannerImg WHERE YachtModel= @YachtModel";
+                    SqlCommand command3 = new SqlCommand(sql3, connection);
+                    command3.Parameters.AddWithValue("@YachtModel", selectmodel);
+                    command3.Parameters.AddWithValue("@BannerImg", saveimages.TrimEnd(','));
                     connection.Open();
-                    command2.ExecuteNonQuery();
+                    command3.ExecuteNonQuery();
                     connection.Close();
+
+                    if(isfirst)        //如果刪的圖同時是FirstBannerImg再執行
+                    {
+
+                        string firstImage;
+
+                        if (saveimages.TrimEnd(',').Contains(","))  //還有多張圖
+                        {
+
+                            string[] images = saveimages.TrimEnd(',').Split(',');
+                            firstImage = images[0];
+                        }
+                        else                                        //刪完之後剩一張
+                        {
+                            firstImage = saveimages.TrimEnd(',');
+                        }
+
+
+                        string sql4 = "Update Yachts set FirstBannerImg =@FirstBannerImg WHERE YachtModel= @YachtModel";
+                        SqlCommand command4 = new SqlCommand(sql4, connection);
+                        command4.Parameters.AddWithValue("@YachtModel", selectmodel);
+                        command4.Parameters.AddWithValue("@FirstBannerImg", firstImage);
+                        connection.Open();
+                        command4.ExecuteNonQuery();
+                        connection.Close();
+                    }
+
                 }
-                else
+                else                     //刪圖之後沒圖了BannerImg跟FirstBannerImg都null
                 {
-                    string sql2 = "Update Yachts set BannerImg =NULL WHERE YachtModel= @YachtModel";
-                    SqlCommand command2 = new SqlCommand(sql2, connection);
-                    command2.Parameters.AddWithValue("@YachtModel", selectmodel);
+                    string sql3 = "Update Yachts set BannerImg =NULL,FirstBannerImg=NULL WHERE YachtModel= @YachtModel";
+                    SqlCommand command3 = new SqlCommand(sql3, connection);
+                    command3.Parameters.AddWithValue("@YachtModel", selectmodel);
 
                     connection.Open();
-                    command2.ExecuteNonQuery();
+                    command3.ExecuteNonQuery();
                     connection.Close();
                 }
 

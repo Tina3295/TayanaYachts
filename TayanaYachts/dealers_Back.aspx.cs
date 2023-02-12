@@ -187,7 +187,22 @@ namespace TayanaYachts
 
                     Show();
                     Dealer();
-                    //CountryDropDownList.SelectedItem.Value = selectcountry;
+
+
+
+                    //預選
+                    string sql2 = "SELECT DealerID FROM Dealer where Area = @Area";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@Area", AddAreaTextBox.Text);
+                    connection.Open();
+                    SqlDataReader reader2 = command2.ExecuteReader();
+                    if (reader2.Read())
+                    {
+                       DealerRadioButtonList.SelectedValue = reader2["DealerID"].ToString();
+                    }
+                    connection.Close();
+
+                    ShowDealerInfo();
                     AddAreaTextBox.Text = "";
                 }
                 else
@@ -205,7 +220,17 @@ namespace TayanaYachts
 
 
         protected void DealerRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)
-        {   //顯示代理商詳細資訊
+        {   
+            ShowDealerInfo();
+        }
+
+
+
+
+
+        protected void ShowDealerInfo()
+        {
+            //顯示代理商詳細資訊
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
 
             string sql = "SELECT * FROM Dealer where DealerID = @DealerID";
@@ -233,6 +258,7 @@ namespace TayanaYachts
             DealerInfoHide.Visible = true;
 
             TipHide();
+
         }
 
         //protected void DealerRadio()
@@ -269,10 +295,31 @@ namespace TayanaYachts
         {
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
 
-            SqlCommand command = new SqlCommand($"DELETE  FROM Dealer WHERE (DealerID = @DealerID)", connection);
+            //實際刪除代理商圖片
+            string sql = "SELECT DealerImgPath FROM Dealer where DealerID = @DealerID";
+            SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.AddWithValue("@DealerID", DealerRadioButtonList.SelectedValue);
             connection.Open();
-            command.ExecuteNonQuery();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                string img= reader["DealerImgPath"].ToString();
+                if(img!= "NoImage.jpg")
+                {
+                    File.Delete(Server.MapPath("~/images/") + img);
+                }
+            }
+            connection.Close();
+
+
+
+
+
+            //刪除代理商資料
+            SqlCommand command2 = new SqlCommand($"DELETE  FROM Dealer WHERE (DealerID = @DealerID)", connection);
+            command2.Parameters.AddWithValue("@DealerID", DealerRadioButtonList.SelectedValue);
+            connection.Open();
+            command2.ExecuteNonQuery();
             connection.Close();
 
             Show();
@@ -334,8 +381,8 @@ namespace TayanaYachts
                     if (reader2.Read())
                     {
                         string delFileName = reader2["DealerImgPath"].ToString();
-                        //有舊圖才執行刪除
-                        if (!String.IsNullOrEmpty(delFileName))
+                        //有舊圖且非預設圖才執行刪除
+                        if (!String.IsNullOrEmpty(delFileName)&& delFileName!= "NoImage.jpg")
                         {
                             File.Delete(SavePath + delFileName);
                         }

@@ -86,7 +86,7 @@ namespace TayanaYachts
                     $"<div style='border: 1px solid #CCCCCC;'><p>" +
                     $"<img id='thumbnail_Image{newid}' src='/Images/{thumbnail}' style='z-index: 1;'  />" +
                     $"</p></div></li><li><span>{releaseDate}</span><br />" +
-                    $"<a href='News_view.aspx?id={guid}'>{newsTitle}</a></li><br />" +
+                    $"<a href='News_Detail.aspx?id={guid}'>{newsTitle}</a></li><br />" +
                     $"<li>{summary} </li></ul></div></li>");
             }
             connection.Close();

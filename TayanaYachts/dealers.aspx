@@ -89,8 +89,7 @@
                         <asp:Literal ID="DealerInfo" runat="server"></asp:Literal>
                     </ul>
 
-                    <div class="pagenumber">| <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
-                    <div class="pagenumber1">Items：<span>89</span>  |  Pages：<span>1/9</span></div>
+                    <!----分頁待---->
 
 
                 </div>

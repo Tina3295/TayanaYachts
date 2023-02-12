@@ -10,6 +10,10 @@ CKEDITOR.editorConfig = function( config )
 	// config.uiColor = '#AADC6E';
 	config.removeDialogTabs = 'image:Upload;image:advanced;image:Link';
 	config.removePlugins = 'elementspath';
+	//config.extraPlugins = 'tabletools';
+	//config.toolbar = [
+	//	{ name: 'insert', items: ['Table'] }
+	//];
 };
 
 

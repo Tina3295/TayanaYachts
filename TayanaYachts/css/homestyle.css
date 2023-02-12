@@ -44,3 +44,278 @@ body {
 	width: 1002px;
 	background-repeat: no-repeat;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.menu_y {
+	float: left;
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+	.menu_y a {
+		color: #8B8B8B;
+		text-decoration: none;
+		height: 41px;
+		display: block;
+	}
+
+	.menu_y li {
+		float: left;
+		display: block;
+		height: 41px;
+		font-size: 0px;
+	}
+
+	.menu_y ul {
+		float: left;
+		background-image: url('../images/menu_y1_back.jpg');
+		background-repeat: no-repeat;
+		background-position: right top;
+		padding-right: 0px;
+	}
+
+.menu_yli01 {
+	float: left;
+	background-image: url('../images/menu_y1_04.jpg');
+	background-repeat: no-repeat;
+	width: 104px;
+}
+
+	.menu_yli01:hover {
+		background-image: url('../images/menu_y2_04.jpg');
+		width: 104px;
+	}
+
+.menu_yli02 {
+	background-image: url('../images/menu_y1_05.jpg');
+	width: 160px;
+}
+
+	.menu_yli02:hover {
+		background-image: url('../images/menu_y2_05.jpg');
+		width: 160px;
+	}
+
+.menu_yli03 {
+	background-image: url('../images/menu_y1_06.jpg');
+	width: 123px;
+}
+
+	.menu_yli03:hover {
+		background-image: url('../images/menu_y2_06.jpg');
+		width: 123px;
+	}
+
+.menu_yli04 {
+	background-image: url('../images/menu_y1_07.jpg');
+	width: 97px;
+	margin-left:-4px;
+}
+
+	.menu_yli04:hover {
+		background-image: url('../images/menu_y2_07.jpg');
+		width: 97px;
+	}
+
+.menu_y00 {
+	background-image: url('../images/menu_y1_03.jpg');
+	background-repeat: no-repeat;
+	width: 51px;
+}
+
+
+.box3 {
+	float: left;
+	width: 100%;
+	line-height: 170%;
+}
+	.box3 h4, .box4 h4, .box5 h4 {
+		background-image: url('../images/icon007.gif');
+		background-repeat: no-repeat;
+		background-position: 1px 3px;
+		padding-left: 10px;
+		color: #34A9D4;
+		font-size: 110%;
+		padding-bottom: 10px;
+	}
+	.box3 p img {
+		border: 1px solid #CCCCCC;
+		padding: 5px;
+	}
+
+
+.table02 {
+	width: 100%;
+	border: 1px solid #34a9d4;
+	display:flex;
+}
+	.table02 td {
+		border: 1px solid #34a9d4;
+		width: 30%;
+	}
+
+
+
+.table02td01 {
+	width: 70%;
+	vertical-align: top;
+}
+.table02 table{
+	width:100%;
+	margin-right:-4px;
+}
+
+
+.table02 table th {
+	text-align: left;
+	padding-left: 10px;
+	border: 1px solid #34a9d4;
+
+}
+.table02 table td {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 10px;
+	border: 1px solid #34a9d4;
+}
+	.table02 table tr{
+
+	}
+
+
+
+
+
+.topbuttom {
+	text-align: right;
+	padding-top: 20px;
+	float: right;
+	cursor: pointer;
+}
+.downloads {
+	float: left;
+	line-height: 180%;
+	width: 100%;
+	margin-top: 20px;
+}
+	.downloads p {
+		float: left;
+		padding-bottom: 7px;
+	}
+	.downloads ul {
+		float: left;
+		width: 94%;
+		border: 10px solid #e2e2e0;
+		padding: 10px;
+		line-height: 180%;
+	}
+	.downloads li {
+		background-image: url('../images/icon003.gif');
+		background-repeat: no-repeat;
+		padding-left: 13px;
+		padding-right: 20px;
+		background-position: 1px 3px;
+		white-space: normal;
+		display: inline;
+	}
+	.downloads a {
+		color: #333739;
+		text-decoration: none;
+	}
+		.downloads a:hover {
+			color: #34A9D4;
+		}
+
+
+
+
+
+
+
+.box5 p, .box6 p {
+	background-image: url('../images/icon008.gif');
+	background-repeat: no-repeat;
+	background-position: 1px 4px;
+	padding-left: 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #bdbdbd;
+	color: #068fb0;
+	margin-bottom: 5px;
+	padding-bottom: 2px;
+}
+
+.box6 {
+	float: left;
+	width: 100%;
+}
+
+	.box6 li {
+		float: left;
+		width: 670px;
+		padding: 10px;
+		border: 10px solid #e6e6e6;
+		margin-bottom: 20px;
+		text-align: center;
+		margin-top: 10px;
+	}
+
+
+
+
+.box5 {
+	width: 100%;
+	float: left;
+}
+.box5 li {
+	background-image: url('../images/icon006.gif');
+	width: 48%;
+	background-position: 2px 8px;
+	background-repeat: no-repeat;
+	padding-left: 10px;
+	display: inline-block;
+	vertical-align: top;
+	padding-bottom: 5px;
+	*display: inline;
+	*zoom: 1;
+}
+	.box5 ul {
+		margin-bottom: 20px;
+	}
+
+.box6 {
+	float: left;
+	width: 100%;
+}
+
+	.box6 li {
+		float: left;
+		width: 670px;
+		padding: 10px;
+		border: 10px solid #e6e6e6;
+		margin-bottom: 20px;
+		text-align: center;
+		margin-top: 10px;
+	}

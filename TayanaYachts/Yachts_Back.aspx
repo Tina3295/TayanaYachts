@@ -113,7 +113,7 @@
                             <div style="display: flex; justify-content: center; margin-bottom: 10px">
 
                                 <asp:Button ID="UpdateModelBtn" CssClass="bluebtn" runat="server" Text="Update" Style="margin-right: 130px" OnClick="UpdateModelBtn_Click" />
-                                <asp:Button ID="DeleteModelBtn" CssClass="redbtn" runat="server" Text="Delete" OnClick="DeleteModelBtn_Click" />
+                                <asp:Button ID="DeleteModelBtn" CssClass="redbtn" runat="server" Text="Delete" OnClick="DeleteModelBtn_Click"  OnClientClick="return confirm('Are you sure you want to delete？')"/>
                             </div>
 
 
@@ -177,8 +177,8 @@
 
 
                             <div style="padding-top: 10px">
-                                Banner Images List:<br />
-                                <asp:RadioButtonList ID="BannerImagesRadioButtonList" runat="server" CellPadding="10" RepeatColumns="3" AutoPostBack="True" OnSelectedIndexChanged="BannerImagesRadioButtonList_SelectedIndexChanged"></asp:RadioButtonList>
+                                Banner Images List:<p style="display:inline-block;color:white;border-radius:10px;background-color:#36b9cc;margin-left:15px;font-size:8px">&nbsp;* Home page banner&nbsp;</p><br />
+                                <asp:RadioButtonList ID="BannerImagesRadioButtonList" runat="server" CellPadding="10" RepeatColumns="3" AutoPostBack="True" OnSelectedIndexChanged="BannerImagesRadioButtonList_SelectedIndexChanged" RepeatDirection="Horizontal"></asp:RadioButtonList>
 
 
                                 <div style="display: flex; justify-content: center">
