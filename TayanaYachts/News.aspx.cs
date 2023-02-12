@@ -34,7 +34,7 @@ namespace TayanaYachts
             }
 
             //2.設定控制項參數: 一頁幾筆資料、作用頁面完整網頁名稱
-            Pagination.limit = 3;
+            Pagination.limit = 5;
             Pagination.targetPage = "News.aspx";
 
             //3.建立計算分頁資料顯示邏輯 (每一頁是從第幾筆開始到第幾筆結束)
@@ -84,7 +84,7 @@ namespace TayanaYachts
                 newListHtml.Append($"<li><div class='list01'><ul><li><div '>" +
                     $"<img src='images/new_top01.png' alt='&quot;&quot;' style='display: {displayStr};position: absolute;z-index: 5;'/>" +
                     $"<div style='border: 1px solid #CCCCCC;'><p>" +
-                    $"<img id='thumbnail_Image{newid}' src='/Images/{thumbnail}' style='z-index: 1;'  />" +
+                    $"<img id='thumbnail_Image{newid}' src='/Images/{thumbnail}' style='z-index: 1;width:160px'  />" +
                     $"</p></div></li><li><span>{releaseDate}</span><br />" +
                     $"<a href='News_Detail.aspx?id={guid}'>{newsTitle}</a></li><br />" +
                     $"<li>{summary} </li></ul></div></li>");

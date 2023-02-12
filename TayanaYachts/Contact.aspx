@@ -22,14 +22,7 @@
                     <ul>
                         <li><a href="#">contacts</a></li>
                     </ul>
-
-
-
                 </div>
-
-
-
-
             </div>
 
 
@@ -57,15 +50,17 @@
                             <tbody>
                                 <tr>
                                     <td class="from01td01">Name :</td>
-                                    <td><span>*</span><asp:TextBox ID="NameTextBox" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your name!')"></asp:TextBox></td>
+                                    <td><span>*</span><asp:TextBox ID="Name" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your name!')"></asp:TextBox></td>
                                 </tr>
                                 <tr>
                                     <td class="from01td01">Email :</td>
-                                    <td><span>*</span><asp:TextBox ID="EmailTextBox" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your email!')"></asp:TextBox></td>
+                                    <td><span>*</span><asp:TextBox ID="Email" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your email!')"></asp:TextBox>
+                                        <asp:Label ID="EmailTip" runat="server" Text="" ForeColor="red"></asp:Label>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="from01td01">Phone :</td>
-                                    <td><span>*</span><asp:TextBox ID="PhoneTextBox" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your Phone!')"></asp:TextBox></td>
+                                    <td><span>*</span><asp:TextBox ID="Phone" runat="server" required="" aria-required="true" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Please enter your Phone!')"></asp:TextBox></td>
                                 </tr>
                                 <tr>
                                     <td class="from01td01">Country :</td>
@@ -80,13 +75,13 @@
                                 <tr>
                                     <td class="from01td01">&nbsp;</td>
                                     <td>
-                                        <asp:DropDownList ID="InterestDropDownList" runat="server"></asp:DropDownList>
+                                        <asp:DropDownList ID="ModelDropDownList" runat="server"></asp:DropDownList>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="from01td01">Comments:</td>
                                     <td>
-                                        <asp:TextBox ID="CommentsTextBox" runat="server" TextMode="MultiLine"></asp:TextBox></td>
+                                        <asp:TextBox ID="Comments" runat="server" TextMode="MultiLine" Height="80px" Width="400px"></asp:TextBox></td>
                                 </tr>
                                 <tr>
                                     <td class="from01td01">&nbsp;</td>

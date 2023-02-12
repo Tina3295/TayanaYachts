@@ -30,6 +30,7 @@ namespace TayanaYachts
                 Response.Redirect("News.aspx");
             }
 
+            string id = "";
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
             string sql = "SELECT * FROM News WHERE guid = @guid";
@@ -42,6 +43,8 @@ namespace TayanaYachts
                 NewsTitle.Text = reader["NewsTitle"].ToString();
 
                 NewsContent.Text = HttpUtility.HtmlDecode(reader["NewsContentHtml"].ToString());
+
+                id= reader["NewID"].ToString();
 
                 string newsImage= reader["NewsImage"].ToString();
                 if (!string.IsNullOrEmpty(newsImage))
@@ -60,12 +63,32 @@ namespace TayanaYachts
                     }
 
                 }
-
                
             }
             connection.Close();
 
-            
+
+
+
+
+            //取得附件資料
+            string sql2 = "SELECT * FROM NewsAttachment WHERE NewID = @NewID";
+            SqlCommand command2 = new SqlCommand(sql2, connection);
+            command2.Parameters.AddWithValue("@NewID", id);
+            connection.Open();
+            SqlDataReader reader2 = command2.ExecuteReader();
+
+            while (reader2.Read())
+            {
+                Attachment.Text += "<li><a id='ctl00_ContentPlaceHolder1_RepFile_ctl01_HyperLink1' href='attachment/" + reader2["AttachmentName"].ToString() + "' download>" + reader2["AttachmentName"].ToString() + "</a></li>";
+            }
+            connection.Close();
+
+            if(!string.IsNullOrEmpty(Attachment.Text))
+            {
+                AttachmentPanel.Visible = true;
+            }
+
         }
     }
 }

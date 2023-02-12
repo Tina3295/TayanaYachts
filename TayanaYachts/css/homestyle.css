@@ -319,3 +319,113 @@ body {
 		text-align: center;
 		margin-top: 10px;
 	}
+
+
+
+
+
+
+.news {
+	width: 1002px;
+	margin-top: 18px;
+	float: left;
+}
+
+	.news a {
+		color: #727272;
+		text-decoration: none;
+	}
+
+		.news a:hover {
+			color: #02A5B8;
+		}
+
+.newstitle {
+	float: left;
+	width: 100%;
+}
+
+.newstitlep1 {
+	float: left;
+	padding-left: 22px;
+}
+
+.newstitlep2 {
+	float: right;
+	padding-right: 19px;
+	font-size: 90%;
+}
+
+	.newstitlep2 a:hover {
+	}
+
+	.newstitlep2 a {
+		color: #02a5b8;
+		text-decoration: none;
+	}
+
+.news ul {
+	float: left;
+	margin-top: 15px;
+	width: 100%;
+}
+
+.news li {
+	float: left;
+	padding-left: 22px;
+}
+
+.newstop {
+	top: 0px;
+	left: 0px;
+	position: absolute;
+}
+
+.news01 {
+	background-color: #FFFFFF;
+	padding: 12px;
+	border: 1px solid #d7d7d7;
+	font-size: 90%;
+	float: left;
+	position: relative;
+}
+
+.news02 {
+	background-color: #eeebdc;
+	padding: 12px;
+	font-size: 90%;
+	float: left;
+	position: relative;
+}
+
+.news02p1, .news01p1 {
+	padding: 5px;
+	background-color: #FFFFFF;
+	border: 1px solid #b5b5b5;
+	float: left;
+}
+
+.news02p1img, .news01p1img {
+	height: 95px;
+	width: 95px;
+	overflow: hidden;
+}
+
+	.news02p1img img, .news01p1img img {
+		height: 95px;
+		width: 95px;
+	}
+
+.news02p2 {
+	padding-left: 10px;
+	width: 165px;
+	float: left;
+	color: #02a5b8;
+}
+
+.news02 span, .news01 span {
+	font-weight: bold;
+	color: #447d90;
+	margin-bottom: 6px;
+	display: block;
+}

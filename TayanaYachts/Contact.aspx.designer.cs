@@ -15,31 +15,40 @@ namespace TayanaYachts
     {
 
         /// <summary>
-        /// NameTextBox 控制項。
+        /// Name 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameTextBox;
+        protected global::System.Web.UI.WebControls.TextBox Name;
 
         /// <summary>
-        /// EmailTextBox 控制項。
+        /// Email 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EmailTextBox;
+        protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
-        /// PhoneTextBox 控制項。
+        /// EmailTip 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PhoneTextBox;
+        protected global::System.Web.UI.WebControls.Label EmailTip;
+
+        /// <summary>
+        /// Phone 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Phone;
 
         /// <summary>
         /// CountryDropDownList 控制項。
@@ -51,22 +60,22 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.DropDownList CountryDropDownList;
 
         /// <summary>
-        /// InterestDropDownList 控制項。
+        /// ModelDropDownList 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList InterestDropDownList;
+        protected global::System.Web.UI.WebControls.DropDownList ModelDropDownList;
 
         /// <summary>
-        /// CommentsTextBox 控制項。
+        /// Comments 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CommentsTextBox;
+        protected global::System.Web.UI.WebControls.TextBox Comments;
 
         /// <summary>
         /// Recaptcha 控制項。

@@ -33,10 +33,10 @@
                                     <asp:Image ID="Newbuilding" runat="server" src='/images/newbuilding.jpg' Style='margin-right: 10px' Height="15px" Visible="false" />
                                     <asp:Image ID="Newdesign" runat="server" src='/images/newdesign.jpg' Style='margin-left: 0px' Height="15px" Visible="false" />
                                 </div>
-                                <div style="margin-top: 25px; display: flex; justify-content: center">
+                        <!--        <div style="margin-top: 25px; display: flex; justify-content: center">
                                     <asp:Button ID="DelModel" CssClass="redbtn" runat="server" Text="Delete" />
 
-                                </div>
+                                </div>-->
                             </div>
 
 
