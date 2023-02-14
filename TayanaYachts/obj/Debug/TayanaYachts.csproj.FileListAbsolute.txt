@@ -94,3 +94,7 @@ C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\System.Memory.xml
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\System.Numerics.Vectors.xml
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\Konscious.Security.Cryptography.Argon2.dll
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\Konscious.Security.Cryptography.Blake2.dll
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\Konscious.Security.Cryptography.Argon2.xml
+C:\Users\swps4\source\repos\TayanaYachts\TayanaYachts\bin\Konscious.Security.Cryptography.Blake2.xml

@@ -16,8 +16,21 @@ namespace TayanaYachts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Userinformation.newsadmin == false)
+            {
+                AdminOnly.Visible = false;
+
+                Tip.Text = "You don't have permission to browse this page!";
+            }
             if (!IsPostBack)
             {
+                //if (Userinformation.newsadmin == false)
+                //{
+                //    AdminOnly.Visible = false;
+
+                //    Tip.Text = "You don't have permission to browse this page!";
+                //}
+
                 Calendar1.SelectedDate = Calendar1.TodaysDate;
                 LoadYears();
                 ShowNewsTitle();
@@ -29,6 +42,8 @@ namespace TayanaYachts
                 {
                     NewsTitlePanel.Visible = false;
                 }
+
+                Master.Page.Title = "News";
             }
 
 
@@ -40,7 +55,7 @@ namespace TayanaYachts
 
         protected void AddTitle_Click(object sender, EventArgs e)
         {
-            if (AddNewsTitle.Text != "")
+            if (!string.IsNullOrWhiteSpace(AddNewsTitle.Text))
             {
                 //隨機識別碼+秒
                 string guid = Guid.NewGuid().ToString().Trim() + DateTime.Now.ToString("ff");

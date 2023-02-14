@@ -15,9 +15,16 @@ namespace TayanaYachts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (Userinformation.yachtsadmin == false)
+            {
+                AdminOnly.Visible = false;
+
+                Tip.Text = "You don't have permission to browse this page!";
+            }
+            if (!IsPostBack)
             {
                 ModelList();
+                Master.Page.Title = "Yachts Content";
             }
             
 

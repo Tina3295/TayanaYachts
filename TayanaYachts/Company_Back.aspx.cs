@@ -16,13 +16,19 @@ namespace TayanaYachts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Userinformation.companyadmin == false)
+            {
+                AdminOnly.Visible = false;
+
+                Tip.Text = "You don't have permission to browse this page!";
+            }
             if (!IsPostBack)
             {
                 CkfinderSetPath();
                 ShowTopContent();
                 ShowVerticalImg();
                 ShowHorizontalImg();
-                //loadImageHList();
+                Master.Page.Title = "Company";
             }
             
         }

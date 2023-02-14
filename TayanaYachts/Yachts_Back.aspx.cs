@@ -15,9 +15,16 @@ namespace TayanaYachts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (Userinformation.yachtsadmin == false)
+            {
+                AdminOnly.Visible = false;
+
+                Tip.Text = "You don't have permission to browse this page!";
+            }
+            if (!IsPostBack)
             {
                 ShowModel();
+                Master.Page.Title = "Yachts";
             }
         }
 
@@ -30,7 +37,7 @@ namespace TayanaYachts
             string modelnum = AddModelNumTextBox.Text;
 
 
-            if (model != "" && modelnum != "")
+            if (!string.IsNullOrWhiteSpace(model) && !string.IsNullOrWhiteSpace(modelnum))
             {
 
                 //比對名字重複

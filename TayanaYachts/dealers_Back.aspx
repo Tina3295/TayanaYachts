@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Label ID="Tip" runat="server" Text=""></asp:Label>
+    <asp:Panel ID="AdminOnly" runat="server">
+
     <!-- Top start -->
     <div style="display: flex; justify-content: space-between">
 
@@ -267,8 +270,9 @@
                             <asp:Button ID="DeleteAgent" Class="redbtn" runat="server" Text="Delete" OnClick="DeleteAgent_Click" OnClientClick="javascript:if(!window.confirm('你確定要刪除嗎?')) window.event.returnValue = false;"/>
                         </div>
                     </div>
-
-
+                            <div Style="text-align:center;margin-top:10px">
+                            <asp:Label ID="UpdateTip" runat="server" Text="" forecolor="Red" ></asp:Label>
+                                </div>
 
 
 
@@ -280,4 +284,5 @@
         </div>
 
     </asp:Panel>
+        </asp:Panel>
 </asp:Content>

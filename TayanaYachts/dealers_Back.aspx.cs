@@ -12,17 +12,25 @@ namespace TayanaYachts
 {
     public partial class Dealers_Back : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Userinformation.dealersadmin == false)
+            {
+                AdminOnly.Visible = false;
+
+                Tip.Text = "You don't have permission to browse this page!";
+            }
             if (!IsPostBack)
             {
                 DropDownList();
                 Dealer();
                 DealerInfoHide.Visible = false;
+                Master.Page.Title = "Dealers";
             }
             Show();
 
-
+            Master.Page.Title = "Dealers";
 
 
 
@@ -64,21 +72,36 @@ namespace TayanaYachts
         protected void AddCountry_Click(object sender, EventArgs e)
         {
             //新增國家
-            if (AddCountryTextBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(AddCountryTextBox.Text))
             {
+                //比對名字重複
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-
-                string sql = "INSERT INTO DealerCountry (Country) VALUES (@Country)";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@Country", AddCountryTextBox.Text);
+                SqlCommand command = new SqlCommand($"select Country from DealerCountry where (Country=@Country)", connection);
+                command.Parameters.AddWithValue("Country", AddCountryTextBox.Text);
                 connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                SqlDataReader reader = command.ExecuteReader();
 
-                Show();
-                DropDownList();
-                AddCountryTextBox.Text = "";
-                AddCountryTip.Text = "";
+                if (reader.HasRows)
+                {
+                    connection.Close();
+                    AddCountryTip.Visible = true;
+                    AddCountryTip.Text = "There's already had same Country!";
+                }
+                else
+                {
+                    connection.Close();
+                    string sql2 = "INSERT INTO DealerCountry (Country) VALUES (@Country)";
+                    SqlCommand command2 = new SqlCommand(sql2, connection);
+                    command2.Parameters.AddWithValue("@Country", AddCountryTextBox.Text);
+                    connection.Open();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+
+                    Show();
+                    DropDownList();
+                    AddCountryTextBox.Text = "";
+                    AddCountryTip.Text = "";
+                }
             }
             else
             {
@@ -170,40 +193,58 @@ namespace TayanaYachts
         protected void AddArea_Click(object sender, EventArgs e)
         {
             //新增地區代理商
-            if (AddAreaTextBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(AddAreaTextBox.Text))
             {
                 if (CountryDropDownList.SelectedItem.Value != "0")
                 {
-                    string selectcountry = CountryDropDownList.SelectedItem.Value;
+                    //比對名字重複
                     SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
-
-                    string sql = "INSERT INTO Dealer (CountryID,Area) VALUES (@CountryID,@Area)";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@CountryID", Convert.ToInt32(selectcountry));
+                    SqlCommand command = new SqlCommand($"select Area from Dealer where (Area=@Area)", connection);
                     command.Parameters.AddWithValue("@Area", AddAreaTextBox.Text);
                     connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    Show();
-                    Dealer();
-
-
-
-                    //預選
-                    string sql2 = "SELECT DealerID FROM Dealer where Area = @Area";
-                    SqlCommand command2 = new SqlCommand(sql2, connection);
-                    command2.Parameters.AddWithValue("@Area", AddAreaTextBox.Text);
-                    connection.Open();
-                    SqlDataReader reader2 = command2.ExecuteReader();
-                    if (reader2.Read())
+                    if (reader.HasRows)
                     {
-                       DealerRadioButtonList.SelectedValue = reader2["DealerID"].ToString();
+                        connection.Close();
+                        AddAreaTip.Visible = true;
+                        AddAreaTip.Text = "There's already had same area!";
                     }
-                    connection.Close();
+                    else
+                    {
+                        connection.Close();
 
-                    ShowDealerInfo();
-                    AddAreaTextBox.Text = "";
+
+                        string selectcountry = CountryDropDownList.SelectedItem.Value;
+
+                        string sql2 = "INSERT INTO Dealer (CountryID,Area) VALUES (@CountryID,@Area)";
+                        SqlCommand command2 = new SqlCommand(sql2, connection);
+                        command2.Parameters.AddWithValue("@CountryID", Convert.ToInt32(selectcountry));
+                        command2.Parameters.AddWithValue("@Area", AddAreaTextBox.Text);
+                        connection.Open();
+                        command2.ExecuteNonQuery();
+                        connection.Close();
+
+                        Show();
+                        Dealer();
+
+
+
+                        //預選
+                        string sql3 = "SELECT DealerID FROM Dealer where Area = @Area";
+                        SqlCommand command3 = new SqlCommand(sql3, connection);
+                        command3.Parameters.AddWithValue("@Area", AddAreaTextBox.Text);
+                        connection.Open();
+                        SqlDataReader reader3 = command3.ExecuteReader();
+                        if (reader3.Read())
+                        {
+                            DealerRadioButtonList.SelectedValue = reader3["DealerID"].ToString();
+                        }
+                        connection.Close();
+
+                        ShowDealerInfo();
+                        AddAreaTextBox.Text = "";
+                    }
                 }
                 else
                 {
@@ -222,6 +263,7 @@ namespace TayanaYachts
         protected void DealerRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)
         {   
             ShowDealerInfo();
+            UpdateTip.Text = "";
         }
 
 
@@ -288,6 +330,8 @@ namespace TayanaYachts
         protected void CountryDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {//隨著選擇地區變換顯示詳細資訊
             Dealer();
+            DealerRadioButtonList.SelectedIndex = 0;
+            ShowDealerInfo();
             TipHide();
         }
 
@@ -349,6 +393,7 @@ namespace TayanaYachts
             connection.Close();
 
             DealerRadioButtonList.SelectedItem.Text = Area.Text.ToString();
+            UpdateTip.Text = "*Upload Success! - " + DateTime.Now.ToString("G");
         }
 
 
@@ -451,6 +496,7 @@ namespace TayanaYachts
             AgentimgUploadTip.Visible = false;
             AddCountryTip.Visible = false;
             AddAreaTip.Visible = false;
+            
         }
     }
 }

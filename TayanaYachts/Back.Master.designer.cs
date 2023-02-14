@@ -42,22 +42,31 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Panel SystemHide;
 
         /// <summary>
-        /// VideoHide 控制項。
+        /// YachtsHide 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel VideoHide;
+        protected global::System.Web.UI.WebControls.Panel YachtsHide;
 
         /// <summary>
-        /// AlbumHide 控制項。
+        /// YachtsContentHide 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AlbumHide;
+        protected global::System.Web.UI.WebControls.Panel YachtsContentHide;
+
+        /// <summary>
+        /// NewsHide 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel NewsHide;
 
         /// <summary>
         /// CompanyHide 控制項。
@@ -69,13 +78,13 @@ namespace TayanaYachts
         protected global::System.Web.UI.WebControls.Panel CompanyHide;
 
         /// <summary>
-        /// LinkHide 控制項。
+        /// DealersHide 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel LinkHide;
+        protected global::System.Web.UI.WebControls.Panel DealersHide;
 
         /// <summary>
         /// Panel1 控制項。
