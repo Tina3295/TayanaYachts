@@ -134,6 +134,10 @@ namespace TayanaYachts
                 connection.Close();
                 DealerInfoHide.Visible = false;
             }
+            else
+            {
+                DealerRadioButtonList.Items.Clear();
+            }
         }
 
 
@@ -144,14 +148,38 @@ namespace TayanaYachts
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtsConnectionString"].ConnectionString);
 
-            SqlCommand command = new SqlCommand($"DELETE  FROM DealerCountry WHERE  (CountryID = {id});DELETE FROM Dealer WHERE CountryID = {id}", connection);
+            //先刪國家個代理區實際img
+            SqlCommand command = new SqlCommand($"select DealerImgPath from Dealer where (CountryID=@CountryID)", connection);
+            command.Parameters.AddWithValue("@CountryID", id);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string img = reader["DealerImgPath"].ToString();
+                if (img != "NoImage.jpg")
+                {
+                    File.Delete(Server.MapPath("~/images/") + img);
+                }
+
+            }
+            connection.Close();
+
+
+
+
+
+            //資料庫實際刪除
+            SqlCommand command2 = new SqlCommand($"DELETE  FROM DealerCountry WHERE  (CountryID = {id});DELETE FROM Dealer WHERE CountryID = {id}", connection);
 
             connection.Open();
-            command.ExecuteNonQuery();
+            command2.ExecuteNonQuery();
             connection.Close();
 
             Show();
+            Dealer();
             DropDownList();
+            DealerInfoHide.Visible = false;
         }
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -330,8 +358,11 @@ namespace TayanaYachts
         protected void CountryDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {//隨著選擇地區變換顯示詳細資訊
             Dealer();
-            DealerRadioButtonList.SelectedIndex = 0;
-            ShowDealerInfo();
+            if (DealerRadioButtonList.Items.Count > 0)
+            {
+                DealerRadioButtonList.SelectedIndex = 0;
+                ShowDealerInfo();
+            }
             TipHide();
         }
 
